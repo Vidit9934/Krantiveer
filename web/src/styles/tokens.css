@@ -1,0 +1,61 @@
+/* Tokens mirror DESIGN.md. Add a token there before using one here. */
+:root {
+  --ground: #070605;
+  --surface-1: #0e0c0a;
+  --surface-2: #14110e;
+  --surface-3: #1d1915;
+  --ink: #efe8da;
+  --muted: #a89e8c;
+  --gold: #c9a24b;
+  --gold-hi: #ecd493;
+  --bronze: #7c5c26;
+  --signal: #d9573f;
+
+  --rule: color-mix(in srgb, var(--bronze) 60%, transparent);
+  --rule-soft: color-mix(in srgb, var(--bronze) 30%, transparent);
+
+  --font-display: "Cormorant Garamond", "Cormorant", Georgia, serif;
+  --font-body: "Manrope Variable", "Manrope", "Segoe UI", sans-serif;
+
+  /* Type scale */
+  --t-xs: 0.8125rem;
+  --t-sm: 0.875rem;
+  --t-base: 0.9375rem;
+  --t-md: 1.0625rem;
+  --t-lg: 1.75rem;
+  --t-xl: 2.5rem;
+  --t-2xl: 3.5rem;
+  --t-giant: clamp(3.5rem, 11vw, 11rem);
+  --t-title: clamp(2.75rem, 7vw, 6.5rem);
+
+  --r-sm: 4px;
+  --r-md: 8px;
+  --r-pill: 999px;
+
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 16px;
+  --s-4: 32px;
+  --s-5: 64px;
+  --s-6: 128px;
+
+  --nav-h: 76px;
+  --pad: 20px;
+  --thumb: 72px;
+  --thumb-lg: 96px;
+  --gutter: 20px;
+
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur: 250ms;
+
+  /* Gold type never goes darker than the gold token, so it keeps contrast on the ground. */
+  --gold-text: linear-gradient(120deg, #c9a24b 0%, #f2dc9d 45%, #c9a24b 100%);
+  --gold-metal: linear-gradient(135deg, #8a6a2c 0%, #ecd493 38%, #c9a24b 55%, #7c5c26 100%);
+}
+
+@media (min-width: 760px) {
+  :root {
+    --gutter: 40px;
+    --pad: 28px;
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/pre-safety-hook.sh\"",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "EnterPlanMode",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/plan-mode-hook.sh\"",
+            "timeout": 5,
+            "statusMessage": "Loading plan-mode review protocol..."
+          }
+        ]
+      },
+      {
+        "matcher": "ExitPlanMode",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/exit-plan-gate-hook.sh\"",
+            "timeout": 10,
+            "statusMessage": "Checking plan score..."
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/dep-guard-hook.sh\"",
+            "timeout": 15,
+            "statusMessage": "Checking for critical dependency changes..."
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/push-gate-hook.sh\"",
+            "timeout": 25,
+            "statusMessage": "Checking push stakes..."
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/frontend-integration-hook.sh\"",
+            "timeout": 10,
+            "statusMessage": "Checking frontend/backend integration conventions..."
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/frontend-design-hook.sh\"",
+            "timeout": 10,
+            "statusMessage": "Checking frontend design quality bar..."
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/review-hook.sh\"",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/post-data-safety-hook.sh\"",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/plan-review-hook.sh\"",
+            "timeout": 5,
+            "statusMessage": "Running plan review protocol..."
+          }
+        ]
+      }
+    ]
+  }
+}
