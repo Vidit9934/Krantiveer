@@ -68,10 +68,10 @@ export default function MarketplaceHome() {
                         {c.title}
                         <div className="muted small">{c.label}</div>
                       </th>
-                      <td>{c.language}</td>
-                      <td>{c.deliverable}</td>
-                      <td>{c.deadline}</td>
-                      <td className="num">{c.slots}</td>
+                      <td data-label="Language">{c.language}</td>
+                      <td data-label="Deliverable">{c.deliverable}</td>
+                      <td data-label="Deadline">{c.deadline}</td>
+                      <td className="num" data-label="Slots">{c.slots}</td>
                     </tr>
                   ))}
               </tbody>

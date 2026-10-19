@@ -287,7 +287,7 @@
 }
 @media (min-width: 900px) {
   .results__grid {
-    grid-template-columns: 1.7fr 1fr 0.8fr;
+    grid-template-columns: 1.25fr 1fr 1fr;
   }
 }
 
@@ -500,5 +500,82 @@
   .voices__quote {
     transition: none;
     animation: none;
+  }
+}
+
+/* ---------- Phones and small tablets: tighter rhythm, nothing sized to a full screen ---------- */
+@media (max-width: 899px) {
+  .statement,
+  .doors,
+  .close {
+    min-height: 0;
+    padding-block: clamp(56px, 11vw, 88px);
+  }
+  .close {
+    gap: var(--s-4);
+  }
+  .path,
+  .proof,
+  .results,
+  .estimator,
+  .faq {
+    padding-block: clamp(48px, 10vw, 72px);
+  }
+  .path {
+    gap: var(--s-4);
+  }
+  .path__list {
+    gap: clamp(40px, 12vw, 72px);
+    padding-block: 0;
+  }
+  .results,
+  .estimator,
+  .faq {
+    gap: var(--s-4);
+  }
+  .voices {
+    padding-block: clamp(40px, 8vw, 64px);
+  }
+  .footer {
+    margin-top: var(--s-4);
+  }
+  .disc__spin {
+    animation-duration: 16s;
+  }
+}
+
+/* Tables become stacked rows on phones so no column is squeezed to a sliver. */
+@media (max-width: 719px) {
+  .table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .table,
+  .table tbody,
+  .table tr,
+  .table th,
+  .table td {
+    display: block;
+  }
+  .table tr {
+    padding: var(--s-3) 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .table th,
+  .table td {
+    padding: 2px 0;
+    border: 0;
+    text-align: left;
+  }
+  .table td[data-label]::before {
+    content: attr(data-label) ": ";
+    color: var(--muted);
+    font-size: var(--t-xs);
+  }
+  .table .num {
+    text-align: left;
   }
 }

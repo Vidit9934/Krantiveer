@@ -13,6 +13,7 @@ import "./styles/shell.css";
 import "./styles/nav.css";
 import "./styles/home.css";
 import "./styles/conversion.css";
+import "./styles/charts.css";
 import "./styles/pages.css";
 import { SideProvider } from "./context/SideContext";
 import { JoinProvider } from "./context/JoinContext";

@@ -6,8 +6,8 @@ import { Cover } from "../../components/Cover";
 import { releases } from "../../data/site";
 
 /**
- * Scene 3. A horizontal gallery: on desktop the scene pins and vertical scroll slides the
- * posters sideways; on touch and with reduced motion it is a native swipeable strip.
+ * Scene 3. A horizontal gallery: the scene pins and vertical scroll slides the
+ * posters sideways, on phones too. With reduced motion it is a native swipeable strip.
  */
 export function Releases() {
   const root = useRef<HTMLElement>(null);
@@ -17,7 +17,7 @@ export function Releases() {
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
-      mm.add("(min-width: 900px) and (prefers-reduced-motion: no-preference) and (hover: hover)", () => {
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
         const t = track.current;
         const p = pin.current;
         if (!t || !p) return;

@@ -14,8 +14,10 @@ export interface RosterArtist extends Proof {
 export interface Stat extends Proof {
   value: string;
   label: string;
-  /** Eight points for the sparkline, low to high. Decorative until the figure is confirmed. */
-  trend: number[];
+  /** Axis titles and the plotted points. Decorative until the figure is confirmed. */
+  xLabel: string;
+  yLabel: string;
+  series: { x: string; y: number }[];
 }
 export interface Quote extends Proof {
   text: string;
@@ -45,10 +47,36 @@ export const press: { name: string; confirmed: boolean }[] = [
   { name: "Press outlet", confirmed: false },
 ];
 
+const weeks = ["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"];
+const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"];
+const campaigns = ["C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8"];
+const points = (xs: string[], ys: number[]) => xs.map((x, i) => ({ x, y: ys[i] }));
+
 export const stats: Stat[] = [
-  { value: "12M", label: "streams moved in one placeholder campaign", trend: [4, 5, 7, 6, 9, 12, 15, 22], confirmed: false },
-  { value: "340", label: "vetted creators on the placeholder roster", trend: [2, 3, 3, 5, 6, 8, 9, 10], confirmed: false },
-  { value: "6 days", label: "placeholder median time to go live", trend: [9, 8, 8, 7, 7, 6, 6, 6], confirmed: false },
+  {
+    value: "12M",
+    label: "streams moved in one placeholder campaign",
+    xLabel: "Weeks since release",
+    yLabel: "Streams (millions)",
+    series: points(weeks, [0.4, 0.9, 1.6, 2.8, 4.7, 7.1, 9.6, 12]),
+    confirmed: false,
+  },
+  {
+    value: "340",
+    label: "vetted creators on the placeholder roster",
+    xLabel: "Month",
+    yLabel: "Approved creators",
+    series: points(months, [40, 75, 120, 160, 210, 260, 300, 340]),
+    confirmed: false,
+  },
+  {
+    value: "6 days",
+    label: "placeholder median time to go live",
+    xLabel: "Campaign",
+    yLabel: "Days to go live",
+    series: points(campaigns, [9, 8, 8, 7, 7, 6, 6, 6]),
+    confirmed: false,
+  },
 ];
 
 export const story = {

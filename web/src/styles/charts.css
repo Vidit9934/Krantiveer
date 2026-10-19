@@ -1,0 +1,60 @@
+/* Charts and the phone layout of the releases scene. Loaded last. */
+.chart {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.chart__grid {
+  stroke: var(--rule-soft);
+  stroke-width: 1;
+  stroke-dasharray: 2 4;
+}
+.chart__axis {
+  stroke: var(--bronze);
+  stroke-width: 1;
+}
+.chart__tick {
+  fill: var(--muted);
+  font-size: 10px;
+  font-family: var(--font-body);
+}
+.chart__title {
+  fill: var(--muted);
+  font-size: 10.5px;
+  font-family: var(--font-body);
+  font-weight: 600;
+}
+.chart__line {
+  fill: none;
+  stroke: var(--gold-hi);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+}
+.chart__dot {
+  fill: var(--ground);
+  stroke: var(--gold-hi);
+  stroke-width: 2;
+}
+.stat figcaption {
+  order: -1;
+}
+
+/* Releases on phones: smaller posters so the next one peeks in as the scene slides sideways. */
+@media (max-width: 899px) {
+  .releases__intro {
+    width: min(64vw, 300px);
+  }
+  .releases__intro h2 {
+    font-size: clamp(2.8rem, 14vw, 4.2rem);
+  }
+  .poster {
+    width: 66vw;
+    max-width: 320px;
+  }
+  .releases__end {
+    padding-right: var(--gutter);
+    font-size: 2.2rem;
+  }
+}

@@ -56,8 +56,8 @@ export default function LinksLanding() {
                   {rows.map((r) => (
                     <tr key={r[0]}>
                       <th scope="row" style={{ color: "var(--ink)" }}>{r[0]}</th>
-                      <td>{r[1]}</td>
-                      <td>{r[2]}</td>
+                      <td data-label="Free">{r[1]}</td>
+                      <td data-label="Pro">{r[2]}</td>
                     </tr>
                   ))}
                 </tbody>

@@ -72,8 +72,8 @@ export default function Services() {
                         {s.name}
                       </span>
                     </th>
-                    <td>{s.gets}</td>
-                    <td className="muted">{s.wont}</td>
+                    <td data-label="What you get">{s.gets}</td>
+                    <td className="muted" data-label="What KMF will not do">{s.wont}</td>
                   </tr>
                 ))}
               </tbody>

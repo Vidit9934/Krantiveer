@@ -45,6 +45,13 @@ export function Hero() {
       if (prefersReducedMotion()) return;
 
       const mm = gsap.matchMedia();
+      /* Phones have no pin, but the record still turns with the scroll and the arm sweeps. */
+      mm.add("(max-width: 899px)", () => {
+        const tl = gsap.timeline({
+          scrollTrigger: { trigger: root.current, start: "top top", end: "bottom top", scrub: 0.6 },
+        });
+        tl.to(".disc__scroll", { rotation: 300, ease: "none" }, 0).to("[data-arm]", { rotation: 14, svgOrigin: "190 40", ease: "none" }, 0);
+      });
       mm.add("(min-width: 900px)", () => {
         const tl = gsap.timeline({
           scrollTrigger: { trigger: root.current, start: "top top", end: "+=115%", pin: true, scrub: 0.8, anticipatePin: 1 },
