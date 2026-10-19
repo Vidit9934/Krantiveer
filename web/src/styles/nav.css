@@ -130,7 +130,7 @@
   }
 }
 
-/* Narrow screens: opaque sheet under the bar */
+/* Narrow screens: opaque sheet under the bar. Motion is driven by Menu.tsx. */
 .sheet {
   position: fixed;
   inset: var(--nav-h) 0 0 0;
@@ -143,27 +143,29 @@
   background: var(--ground);
   overflow-y: auto;
   visibility: hidden;
-  opacity: 0;
-  transform: translateY(-12px);
-  transition: opacity 0.35s var(--ease), transform 0.5s var(--ease), visibility 0s linear 0.5s;
-}
-.sheet.is-open {
-  visibility: visible;
-  opacity: 1;
-  transform: none;
-  transition-delay: 0s;
 }
 .sheet__links {
   display: grid;
 }
-.sheet__links a {
-  padding: 14px 0;
+.sheet__mask {
+  display: block;
+  overflow: hidden;
   border-bottom: 1px solid var(--rule-soft);
+}
+.sheet__links a {
+  display: block;
+  padding: 14px 0;
   font-family: var(--font-display);
   font-weight: 400;
   font-size: 1.9rem;
   line-height: 1.1;
   text-decoration: none;
+  transition: color var(--dur) var(--ease), padding-left 0.5s var(--ease);
+}
+.sheet__links a:hover,
+.sheet__links a:focus-visible {
+  color: var(--gold-hi);
+  padding-left: 10px;
 }
 .sheet__foot {
   display: grid;
@@ -184,11 +186,6 @@
 @media (min-width: 1180px) {
   .sheet {
     display: none;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .sheet {
-    transition: none;
   }
 }
 
