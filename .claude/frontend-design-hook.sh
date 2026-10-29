@@ -5,9 +5,11 @@
 # its repo-specific conventions appended. Companion to frontend-integration-hook.sh
 # (API wiring, tunefry-only); this one covers visual/aesthetic quality.
 
+source "$(dirname "${BASH_SOURCE[0]}")/resolve-python.sh"
+
 input=$(cat)
 
-parsed=$(echo "$input" | python3 -c "
+parsed=$(echo "$input" | "$PYTHON" -c "
 import sys, json
 try:
     d = json.load(sys.stdin)
@@ -48,7 +50,7 @@ else
   export DESIGN_REPO_RULE="Follow the styling convention already used in this project (tokens as CSS variables, plain CSS vs. a library) - do not introduce a UI library without asking."
 fi
 
-python3 -c "
+"$PYTHON" -c "
 import json, os
 reason = '''FRONTEND DESIGN QUALITY CHECKLIST for this file (frontend-design skill):
 1. Ground the design in the subject matter (its audience, materials, vernacular) and commit to ONE bold aesthetic direction before coding - no safe/generic default.

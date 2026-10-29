@@ -17,7 +17,8 @@ fi
 file=$(echo "$input" | grep -o '"file_path"[[:space:]]*:[[:space:]]*"[^"]*"' | head -1 | sed 's/.*"\([^"]*\)".*/\1/')
 
 # ── Migration SQL ────────────────────────────────────────────────────────────
-if echo "$file" | grep -qi 'migrations/.*\.sql'; then
+# $file is still JSON-escaped, so Windows separators arrive as \\ (doubled).
+if echo "$file" | grep -qiE 'migrations(/|\\+).*\.sql'; then
   cat <<'EOF'
 {
   "continue": true,

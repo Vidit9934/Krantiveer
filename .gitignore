@@ -3,3 +3,9 @@ node_modules
 dist
 *.log
 .env*
+
+# Claude Code: local secrets and hook temp files
+.claude/push-gate.local.sh
+.claude/settings.local.json
+.claude/.push_gate_*.json
+.claude/.exit_plan_*.json

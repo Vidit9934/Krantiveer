@@ -17,7 +17,8 @@ file=$(echo "$input" | grep -o '"file_path"[[:space:]]*:[[:space:]]*"[^"]*"' | h
 # Plan files get their own dedicated hook (plan-review-hook.sh) — skip here.
 # Exits WITHOUT writing the cooldown timestamp so plan-file writes don't burn the slot
 # and block the next real code-file review.
-if echo "$file" | grep -qi '\.claude/plans/\|\.claude\\plans\\'; then
+# $file is still JSON-escaped, so a Windows path arrives as .claude\\plans\\ (doubled).
+if echo "$file" | grep -qiE '\.claude(/|\\+)plans(/|\\+)'; then
   echo '{"continue": true}'
   exit 0
 fi

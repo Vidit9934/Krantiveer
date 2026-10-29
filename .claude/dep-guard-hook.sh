@@ -4,10 +4,12 @@
 # supabase/gotrue/postgrest (auth+DB client), boto3 (R2 storage), httpx (Resend/Razorpay
 # HTTP calls), pyjwt/python-jose (JWKS token verification), pydantic (schema validation).
 
+source "$(dirname "${BASH_SOURCE[0]}")/resolve-python.sh"
+
 input=$(cat)
 
 # Extract command (use python3 for reliable JSON parsing, fallback to grep)
-cmd=$(echo "$input" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('tool_input',{}).get('command',''))" 2>/dev/null || \
+cmd=$(echo "$input" | "$PYTHON" -c "import sys,json; d=json.load(sys.stdin); print(d.get('tool_input',{}).get('command',''))" 2>/dev/null || \
       echo "$input" | grep -o '"command"[[:space:]]*:[[:space:]]*"[^"]*"' | head -1 | sed 's/.*"\([^"]*\)".*/\1/')
 
 # Only intercept git commit or git push
@@ -16,7 +18,7 @@ if [[ ! "$cmd" =~ ^git[[:space:]]+(commit|push) ]]; then
 fi
 
 # Extract working directory where the git command would run
-cwd=$(echo "$input" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('cwd','') or d.get('tool_input',{}).get('cwd',''))" 2>/dev/null || echo "")
+cwd=$(echo "$input" | "$PYTHON" -c "import sys,json; d=json.load(sys.stdin); print(d.get('cwd','') or d.get('tool_input',{}).get('cwd',''))" 2>/dev/null || echo "")
 
 if [[ -n "$cwd" ]] && [[ -d "$cwd" ]]; then
   cd "$cwd" || exit 0
@@ -47,7 +49,7 @@ fi
 export GUARD_FILES="$DEP_FILES"
 export GUARD_CHANGES="$CHANGES"
 
-python3 -c "
+"$PYTHON" -c "
 import json, os
 files = os.environ.get('GUARD_FILES', '').strip()
 changes = os.environ.get('GUARD_CHANGES', '')

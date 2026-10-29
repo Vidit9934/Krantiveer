@@ -7,7 +7,7 @@
 # file in ~/.claude/plans) must contain a line like "PLAN SCORE: 86/100" with a
 # score >= 85. Chat text can't be checked reliably, so the score lives in the plan.
 
-PYTHON=$(command -v python3 2>/dev/null || command -v python 2>/dev/null)
+source "$(dirname "${BASH_SOURCE[0]}")/resolve-python.sh"
 if [[ -z "$PYTHON" ]]; then
   exit 0
 fi
@@ -17,7 +17,7 @@ HOOK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TMPINPUT=$(mktemp "$HOOK_DIR/.exit_plan_XXXXXX.json") || exit 0
 printf '%s' "$input" > "$TMPINPUT"
 trap "rm -f '$TMPINPUT'" EXIT
-export HOOK_INPUT_FILE="$TMPINPUT"
+export HOOK_INPUT_FILE="$(native_path "$TMPINPUT")"
 
 "$PYTHON" - <<'PYEOF'
 import json, os, re, glob

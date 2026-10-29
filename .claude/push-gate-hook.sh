@@ -10,7 +10,7 @@
 # Pattern: stdin captured before heredoc → temp file → Python reads via env var.
 # (The heredoc consumes Python's stdin, so hook JSON must be pre-staged to disk.)
 
-PYTHON=$(command -v python3 2>/dev/null || command -v python 2>/dev/null)
+source "$(dirname "${BASH_SOURCE[0]}")/resolve-python.sh"
 
 if [[ -z "$PYTHON" ]]; then
   exit 0
@@ -27,7 +27,7 @@ TMPINPUT=$(mktemp "$HOOK_DIR/.push_gate_XXXXXX.json") || exit 0
 printf '%s' "$input" > "$TMPINPUT"
 trap "rm -f '$TMPINPUT'" EXIT
 
-export HOOK_INPUT_FILE="$TMPINPUT"
+export HOOK_INPUT_FILE="$(native_path "$TMPINPUT")"
 # Set DIAL_API_KEY in your shell/user env, or drop a gitignored
 # .claude/push-gate.local.sh (sourced below) to enable the AI stakes-
 # classification call. Never hardcode a key in THIS file — it is git-tracked.

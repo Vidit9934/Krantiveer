@@ -12,8 +12,10 @@ if ! echo "$input" | grep -q '\.claude'; then
   exit 0
 fi
 
-# python3 -c reads source from the argument, leaving stdin free for JSON data
-result=$(echo "$input" | python3 -c "
+source "$(dirname "${BASH_SOURCE[0]}")/resolve-python.sh"
+
+# python -c reads source from the argument, leaving stdin free for JSON data
+result=$(echo "$input" | "$PYTHON" -c "
 import sys, json
 try:
     data = json.load(sys.stdin)
@@ -29,7 +31,7 @@ if [[ "$result" != "review" ]]; then
   exit 0
 fi
 
-python3 -c "
+"$PYTHON" -c "
 import json
 reason = '''PLAN FILE WRITTEN — SENIOR SDE + ARCHITECT REVIEW PROTOCOL
 

@@ -3,9 +3,11 @@
 # conventions whenever a file in the sibling tunefry-frontend repo is about to
 # be created/edited.
 
+source "$(dirname "${BASH_SOURCE[0]}")/resolve-python.sh"
+
 input=$(cat)
 
-parsed=$(echo "$input" | python3 -c "
+parsed=$(echo "$input" | "$PYTHON" -c "
 import sys, json
 try:
     d = json.load(sys.stdin)
@@ -33,7 +35,7 @@ if [[ "$norm" != *"tunefry frontend"* ]] || [[ "$norm" == *"/node_modules/"* ]];
   exit 0
 fi
 
-python3 -c "
+"$PYTHON" -c "
 import json
 reason = '''FRONTEND<->BACKEND INTEGRATION CHECKLIST for this file:
 1. API calls go through src/lib/*.js service modules (auth.js, billing.js, payment.js, profile.js, r2upload.js) - no raw fetch/axios directly in components/pages.

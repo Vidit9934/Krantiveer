@@ -3,9 +3,11 @@
 # protocol. Claude must produce a PLAN SCORE: XX/100 before calling ExitPlanMode.
 # No path filtering needed: always fires in plan mode.
 
+source "$(dirname "${BASH_SOURCE[0]}")/resolve-python.sh"
+
 cat > /dev/null  # drain stdin — EnterPlanMode carries no relevant payload
 
-python3 -c "
+"$PYTHON" -c "
 import json
 reason = '''PLAN MODE ACTIVATED — SENIOR SDE + ARCHITECT REVIEW PROTOCOL
 
