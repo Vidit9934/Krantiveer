@@ -12,8 +12,12 @@ input=$(cat)
 cmd=$(echo "$input" | "$PYTHON" -c "import sys,json; d=json.load(sys.stdin); print(d.get('tool_input',{}).get('command',''))" 2>/dev/null || \
       echo "$input" | grep -o '"command"[[:space:]]*:[[:space:]]*"[^"]*"' | head -1 | sed 's/.*"\([^"]*\)".*/\1/')
 
-# Only intercept git commit or git push
-if [[ ! "$cmd" =~ ^git[[:space:]]+(commit|push) ]]; then
+# Only intercept git commit or git push — also when chained (`cd repo && git commit`)
+# or given global options (`git -C repo commit`). `git commit-tree` and text like
+# `echo "git commit"` don't match.
+GIT_OPTION_ARG="(\"[^\"]*\"|'[^']*'|[^[:space:]]+)"
+GIT_COMMIT_OR_PUSH="(^|[;&|(])[[:space:]]*git([[:space:]]+-[Cc][[:space:]]+${GIT_OPTION_ARG})*[[:space:]]+(commit|push)([[:space:]]|\$)"
+if [[ ! "$cmd" =~ $GIT_COMMIT_OR_PUSH ]]; then
   exit 0
 fi
 
@@ -23,6 +27,28 @@ cwd=$(echo "$input" | "$PYTHON" -c "import sys,json; d=json.load(sys.stdin); pri
 if [[ -n "$cwd" ]] && [[ -d "$cwd" ]]; then
   cd "$cwd" || exit 0
 fi
+
+# Then follow the command's own directory changes: a leading `cd <dir>` and any
+# `git -C <dir>`, one per line, applied in order so relative dirs resolve like bash.
+# shlex only tokenises the string; nothing in it is executed.
+target_dirs=$(GUARD_CMD="$cmd" "$PYTHON" -c "
+import os, shlex
+try:
+    words = shlex.split(os.environ['GUARD_CMD'])
+except ValueError:
+    words = []
+if len(words) > 1 and words[0] == 'cd':
+    print(words[1].rstrip(';'))
+seen_git = False
+for i, word in enumerate(words[:-1]):
+    seen_git = seen_git or word == 'git'
+    if seen_git and word == '-C':
+        print(words[i + 1])
+" 2>/dev/null)
+
+while IFS= read -r dir; do
+  [[ -n "$dir" && -d "$dir" ]] && cd "$dir"
+done <<< "$target_dirs"
 
 # Find staged dependency files
 DEP_FILES=$(git diff --cached --name-only 2>/dev/null | \
