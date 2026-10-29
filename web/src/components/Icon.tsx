@@ -25,6 +25,7 @@ const paths = {
   eye: "M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zm10 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6z",
   user: "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 20c.8-4 4-6 8-6s7.200 2 8 6",
   down: "M6 9l6 6 6-6",
+  upright: "M7 17 17 7M8 7h9v9",
   grid: "M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z",
   clock: "M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7v5l3 2",
   external: "M14 4h6v6M20 4l-9 9M18 14v6H4V6h6",

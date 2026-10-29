@@ -28,16 +28,22 @@
   transition: transform 0.5s var(--ease);
 }
 .index__ref {
-  font-family: var(--font-display);
+  font-family: var(--font-mono);
   color: var(--gold);
-  font-size: var(--t-md);
+  font-size: var(--t-xs);
 }
 .index__title strong {
   display: block;
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: 650;
   font-size: var(--t-lg);
-  line-height: 1.15;
+  line-height: 1.1;
+  letter-spacing: -0.018em;
+  font-variation-settings: "wght" 650, "wdth" 100;
+  transition: font-variation-settings 0.6s var(--ease);
+}
+.index__row:hover .index__title strong {
+  font-variation-settings: "wght" 620, "wdth" 90;
 }
 .index__title small {
   display: block;
@@ -99,15 +105,19 @@
 }
 .regional__name {
   font-family: var(--font-display);
-  font-weight: 300;
-  font-size: clamp(2.2rem, 5vw, 4.2rem);
+  font-weight: 650;
+  font-size: clamp(2rem, 3.8vw, 3.25rem);
   line-height: 1;
-  letter-spacing: -0.02em;
-  transition: color 0.4s var(--ease), transform 0.6s var(--ease);
+  letter-spacing: -0.026em;
+  font-variation-settings: "wght" 700, "wdth" 92;
+  transition: color 0.4s var(--ease), transform 0.6s var(--ease), font-variation-settings 0.7s var(--ease);
 }
-.regional a:hover .regional__name {
+/* The one reactive moment on the hub: the language name swells and condenses as it slides. */
+.regional a:hover .regional__name,
+.regional a:focus-visible .regional__name {
   color: var(--gold-hi);
   transform: translateX(10px);
+  font-variation-settings: "wght" 700, "wdth" 80;
 }
 .regional p {
   color: var(--muted);
@@ -142,8 +152,15 @@
   display: block;
   font-family: var(--font-display);
   font-size: var(--t-xl);
-  font-weight: 400;
+  font-weight: 700;
+  letter-spacing: -0.022em;
   color: var(--gold-hi);
+}
+.paper .founder__plate {
+  background: var(--paper-2);
+}
+.paper .founder__plate b {
+  color: var(--gold-deep);
 }
 @media (min-width: 900px) {
   .founder {
@@ -165,20 +182,36 @@
 }
 .plan-row h3 {
   font-size: var(--t-lg);
+  font-weight: 650;
+  letter-spacing: -0.018em;
 }
 .plan-row__price {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 700;
   font-size: var(--t-xl);
+  letter-spacing: -0.022em;
   color: var(--gold-hi);
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
 .plan-row__price small {
   display: block;
-  font-family: var(--font-body);
+  font-family: var(--font-mono);
   font-size: var(--t-xs);
+  letter-spacing: 0.02em;
   color: var(--muted);
+}
+.plan-row:has(input:checked) {
+  box-shadow: inset 3px 0 0 var(--gold);
+  padding-left: 14px;
+}
+.paper .plan-row__price,
+.paper .plan-row li svg {
+  color: var(--gold-deep);
+}
+.paper .plan-row:has(input:checked) {
+  box-shadow: inset 3px 0 0 var(--gold-deep);
+  background: color-mix(in srgb, var(--paper-2) 60%, transparent);
 }
 .plan-row ul {
   display: grid;
@@ -214,7 +247,12 @@
 }
 .post-row h3 {
   font-size: var(--t-lg);
+  font-weight: 650;
+  letter-spacing: -0.018em;
   transition: color 0.4s var(--ease);
+}
+.post-row__date {
+  color: var(--muted);
 }
 .post-row:hover h3 {
   color: var(--gold-hi);
@@ -254,6 +292,10 @@
   font-size: var(--t-sm);
   font-weight: 600;
 }
+.paper .wa-card:hover {
+  border-color: var(--gold-deep);
+  background: rgb(122 90 30 / 0.07);
+}
 .wa-card small {
   color: var(--gold);
   font-size: var(--t-xs);
@@ -264,7 +306,7 @@
 }
 .budget__bar {
   height: 8px;
-  background: var(--surface-3);
+  background: color-mix(in srgb, var(--ink) 14%, transparent);
   border-radius: 2px;
   overflow: hidden;
 }
@@ -292,12 +334,14 @@
   display: none;
 }
 .release__ref {
-  font-family: var(--font-display);
+  font-family: var(--font-mono);
   color: var(--gold);
-  font-size: var(--t-sm);
+  font-size: var(--t-xs);
 }
 .release h3 {
   font-size: var(--t-lg);
+  font-weight: 650;
+  letter-spacing: -0.018em;
   margin: 2px 0 4px;
 }
 a.release:hover h2,
@@ -307,6 +351,8 @@ a.release:hover h3 {
 .tile__price {
   font-family: var(--font-display);
   font-size: var(--t-xl);
+  font-weight: 700;
+  letter-spacing: -0.022em;
   color: var(--gold);
   font-variant-numeric: tabular-nums;
   line-height: 1.1;
@@ -388,6 +434,13 @@ a.release:hover h3 {
   background: var(--surface-3);
   box-shadow: inset 3px 0 0 var(--gold);
 }
+.paper .lessons button:hover,
+.paper .lessons button[aria-current="true"] {
+  background: color-mix(in srgb, var(--ink-paper) 7%, transparent);
+}
+.paper .lessons button[aria-current="true"] {
+  box-shadow: inset 3px 0 0 var(--gold-deep);
+}
 
 /* Links builder */
 .builder {
@@ -437,6 +490,18 @@ a.release:hover h3 {
 .blocklist li.is-on {
   border-color: var(--gold);
   background: var(--surface-2);
+}
+.paper .blocklist li.is-on {
+  border-color: var(--gold-deep);
+  background: var(--paper);
+}
+.paper .icon-btn:hover:not(:disabled) {
+  border-color: var(--gold-deep);
+  color: var(--gold-deep);
+}
+.paper .phone-frame {
+  background: var(--ink-paper);
+  border-color: var(--ink-paper);
 }
 .blocklist__main {
   flex: 1;
@@ -618,4 +683,61 @@ a.release:hover h3 {
   color: var(--muted);
   max-width: 44ch;
   text-align: center;
+}
+
+/* Gold accents on paper move to gold-deep so they pass AA. */
+.paper .index__ref,
+.paper .release__ref,
+.paper .tile__price,
+.paper .post-row:hover h3,
+.paper a.release:hover h2,
+.paper a.release:hover h3,
+.paper .regional a:hover .regional__name {
+  color: var(--gold-deep);
+}
+.paper .index__row::before {
+  background: var(--gold-deep);
+}
+.paper .index__row:hover,
+.paper .index__row:focus-visible {
+  background: var(--paper-2);
+}
+.paper .player {
+  border-color: var(--ink-paper);
+}
+
+/* Services close: the one reactive heading on that page (letters swell toward the pointer). */
+.cta-reactive {
+  display: block;
+  max-width: 17ch;
+  font-size: clamp(1.75rem, 3.2vw, 2.75rem);
+  font-weight: 650;
+  line-height: 1;
+}
+.press-news {
+  max-width: 640px;
+}
+/* ReactiveType drops the trailing space inside each inline-block word; restore the word gap here. */
+/* Inline input + button rows (coupon, song link, newsletter): the input gives way, the button never wraps. */
+.field .row > .input {
+  flex: 1 1 140px;
+  min-width: 0;
+}
+.field .row > .btn,
+.field .row > .magnetic {
+  flex: none;
+  white-space: nowrap;
+}
+.table th svg {
+  flex: none;
+}
+/* The fan page preview keeps its own dark theme inside paper scenes: undo the paper re-pointing. */
+.paper .lv {
+  --ink: var(--ink-dark);
+  --muted: var(--muted-dark);
+  --rule: var(--rule-dark);
+  --rule-soft: var(--rule-soft-dark);
+  --surface-1: var(--surface-1-dark);
+  --surface-2: var(--surface-2-dark);
+  --surface-3: var(--surface-3-dark);
 }

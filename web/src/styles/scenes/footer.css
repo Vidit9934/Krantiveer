@@ -1,0 +1,72 @@
+/* scene: footer. Gold CTA row, links, compact bold sign-off. Overrides the older shell.css block. */
+.footer {
+  margin-top: var(--s-5);
+  padding: var(--s-4) 0 var(--s-3);
+}
+.footer__cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  max-width: calc(1440px - 2 * var(--gutter));
+  margin: 0 var(--gutter) var(--s-4);
+  padding: clamp(20px, 3vw, 32px) clamp(20px, 3vw, 36px);
+  background: var(--gold);
+  color: var(--ink-paper);
+  border-radius: 24px;
+}
+@media (min-width: 1440px) {
+  .footer__cta {
+    margin-inline: auto;
+  }
+}
+.footer__cta-line {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--t-row);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+.footer__cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-3);
+}
+.footer__join {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: var(--ink-paper);
+  color: var(--gold-hi);
+  font-weight: 650;
+  cursor: pointer;
+}
+.footer__wa {
+  font-family: var(--font-mono);
+  font-size: var(--t-sm);
+  color: var(--ink-paper);
+  text-underline-offset: 4px;
+}
+.footer__mark {
+  margin-top: var(--s-3);
+  text-align: left;
+  max-width: 1440px;
+  padding-inline: var(--gutter);
+  margin-inline: auto;
+  font-weight: 750;
+  font-size: clamp(2.25rem, 5vw, 4.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+}
+.footer__mark .footer__word {
+  display: inline-block;
+}
+.footer__links a {
+  font-weight: 560;
+}

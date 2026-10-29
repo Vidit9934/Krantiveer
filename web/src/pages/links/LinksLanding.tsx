@@ -1,3 +1,4 @@
+import { PaperScene } from "../../motion/PaperScene";
 import { PageHead } from "../../components/PageHead";
 import { Button } from "../../components/Button";
 import { Icon } from "../../components/Icon";
@@ -29,8 +30,7 @@ export default function LinksLanding() {
           </div>
         }
       />
-      <div className="wrap section--tight grid grid--sidebar">
-        <div className="stack--lg">
+      <div className="wrap section">
           <section className="stack" aria-labelledby="ll-how">
             <h2 id="ll-how" style={{ fontSize: "1.75rem" }}>One link for everything you release</h2>
             <p className="lede">Paste one song link and the page lists every platform: Spotify, Apple Music, YouTube Music, JioSaavn and more. If the matching service misses one, you add it by hand.</p>
@@ -40,8 +40,10 @@ export default function LinksLanding() {
               <li className="row" style={{ flexWrap: "nowrap", alignItems: "flex-start" }}><Icon name="shield" className="gold" /> Reserved usernames, link scanning, takedown tools and explicit consent for fan data</li>
             </ul>
           </section>
-
-          <section aria-labelledby="ll-plans" className="stack">
+      </div>
+      <PaperScene className="scene-paper" aria-labelledby="ll-plans">
+      <div className="wrap grid grid--sidebar">
+          <section className="stack">
             <h2 id="ll-plans" style={{ fontSize: "1.5rem" }}>Free and Pro</h2>
             <div className="table-wrap">
               <table className="table">
@@ -64,13 +66,13 @@ export default function LinksLanding() {
               </table>
             </div>
           </section>
-        </div>
         <aside className="builder__preview" aria-label="Example page">
           <div className="phone-frame">
             <LinkView page={defaultPage} />
           </div>
         </aside>
       </div>
+      </PaperScene>
     </>
   );
 }

@@ -1,3 +1,4 @@
+import { PaperScene } from "../../motion/PaperScene";
 import { PageHead } from "../../components/PageHead";
 import { Button } from "../../components/Button";
 import { Icon } from "../../components/Icon";
@@ -20,7 +21,7 @@ export default function MarketplaceHome() {
           </div>
         }
       />
-      <div className="wrap section--tight grid grid--sidebar">
+      <div className="wrap section grid grid--sidebar">
         <section className="stack--lg" aria-labelledby="mp-how">
           <h2 id="mp-how" style={{ fontSize: "1.75rem" }}>How a booking runs</h2>
           <ol className="steps">
@@ -42,10 +43,10 @@ export default function MarketplaceHome() {
           </div>
         </aside>
       </div>
-      <section className="section">
+      <PaperScene className="scene-paper" aria-labelledby="mp-live">
         <div className="wrap stack--lg">
           <div className="row">
-            <h2 style={{ fontSize: "1.75rem" }}>Live now</h2>
+            <h2 id="mp-live" style={{ fontSize: "1.75rem" }}>Live now</h2>
             <span className="ph">sample campaigns</span>
           </div>
           <div className="table-wrap">
@@ -70,7 +71,7 @@ export default function MarketplaceHome() {
                       </th>
                       <td data-label="Language">{c.language}</td>
                       <td data-label="Deliverable">{c.deliverable}</td>
-                      <td data-label="Deadline">{c.deadline}</td>
+                      <td data-label="Deadline" className="mono">{c.deadline}</td>
                       <td className="num" data-label="Slots">{c.slots}</td>
                     </tr>
                   ))}
@@ -79,7 +80,7 @@ export default function MarketplaceHome() {
           </div>
           <p className="muted small">The campaign board with budgets hidden is visible only to approved creators.</p>
         </div>
-      </section>
+      </PaperScene>
     </>
   );
 }

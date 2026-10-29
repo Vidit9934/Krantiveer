@@ -5,6 +5,7 @@ import { useJoin } from "../../context/JoinContext";
 import { creators } from "../../data/marketplace";
 import { plans } from "../../data/site";
 import { inr } from "../../lib/format";
+import { PaperScene } from "../../motion/PaperScene";
 
 const languages = ["Hindi", "Punjabi", "Haryanvi", "Bhojpuri", "Devotional"];
 const goals = ["More streams", "Playlist reach", "Reels and creators", "Release plan"];
@@ -40,7 +41,7 @@ export function Estimator() {
   );
 
   return (
-    <section className="estimator" aria-labelledby="est-title">
+    <PaperScene className="estimator" aria-labelledby="est-title">
       <SplitLines as="h2" text="Plan your release in ten seconds." className="estimator__title" id="est-title" />
       <div className="estimator__grid">
         <div className="estimator__controls">
@@ -81,6 +82,6 @@ export function Estimator() {
           </Button>
         </div>
       </div>
-    </section>
+    </PaperScene>
   );
 }

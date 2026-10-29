@@ -1,39 +1,11 @@
+import { ReactiveType } from "../motion/ReactiveType";
+import { PaperScene } from "../motion/PaperScene";
 import { PageHead } from "../components/PageHead";
 import { Button } from "../components/Button";
 import { Icon } from "../components/Icon";
+import { services } from "../data/services";
 
-const services = [
-  {
-    name: "Spotify growth",
-    gets: "Playlist pitching, editorial submission support, pre-save setup and a release-week checklist.",
-    wont: "Buy plays, use botted playlists or promise follower counts.",
-  },
-  {
-    name: "YouTube growth",
-    gets: "Premiere planning, thumbnail and title testing, Shorts cut-downs and creator cross-promotion.",
-    wont: "Sell views or subscribers.",
-  },
-  {
-    name: "Creator reels campaigns",
-    gets: "Vetted Instagram creators matched to your language and niche, booked through the KMF marketplace with one GST invoice.",
-    wont: "Reveal your budget to creators or creator rates to you.",
-  },
-  {
-    name: "Press and EPK",
-    gets: "A bio and EPK, plus a feature article on KMF Press with a clearly labelled byline.",
-    wont: "Publish unlabelled sponsored content.",
-  },
-  {
-    name: "Release planning",
-    gets: "A dated plan from master to week four: content calendar, platform tasks and the KMF Links page for the song.",
-    wont: "Hand you a template that ignores your genre or language.",
-  },
-  {
-    name: "Regional and devotional campaigns",
-    gets: "Calendars built around festivals and regional release rhythms, with creators who speak the language of the song.",
-    wont: "Treat every language as Hindi with a different caption.",
-  },
-];
+
 
 export default function Services() {
   return (
@@ -52,7 +24,7 @@ export default function Services() {
           </div>
         }
       />
-      <section className="section--tight">
+      <PaperScene className="scene-paper" aria-label="Services and limits">
         <div className="wrap">
           <div className="table-wrap">
             <table className="table">
@@ -66,7 +38,7 @@ export default function Services() {
               <tbody>
                 {services.map((s) => (
                   <tr key={s.name}>
-                    <th scope="row" style={{ color: "var(--ink)", fontSize: "1.0625rem" }}>
+                    <th scope="row" style={{ color: "var(--ink)", fontSize: "1.0625rem", fontWeight: 650 }}>
                       <span className="row" style={{ gap: 8, flexWrap: "nowrap" }}>
                         <Icon name="shield" size={18} className="gold" />
                         {s.name}
@@ -80,10 +52,10 @@ export default function Services() {
             </table>
           </div>
         </div>
-      </section>
+      </PaperScene>
       <section className="section">
         <div className="wrap row" style={{ justifyContent: "space-between" }}>
-          <h2 style={{ maxWidth: "18ch" }}>Not sure which service fits your release?</h2>
+          <ReactiveType as="h2" className="cta-reactive" text="Not sure which service fits your release?" />
           <div className="row">
             <Button to="/plans" iconAfter="arrow">
               Compare plans

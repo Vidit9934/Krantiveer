@@ -1,42 +1,42 @@
-import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { gsap, useGSAP } from "../motion/gsap";
-import { prefersReducedMotion } from "../motion/env";
+import { VelocityType } from "../motion/VelocityType";
+import { useJoin } from "../context/JoinContext";
 import { allNav } from "../data/nav";
+import { site } from "../data/site";
+import { Icon } from "./Icon";
 
-const links = allNav;
-
-/** A giant wordmark that rises into place, with the real routes beneath it. */
+/** Gold CTA row, the real routes, a compact bold sign-off and mono details. */
 export function Footer() {
-  const root = useRef<HTMLElement>(null);
-  const mark = useRef<HTMLDivElement>(null);
-
-  useGSAP(
-    () => {
-      if (!mark.current || prefersReducedMotion()) return;
-      gsap.from(mark.current, {
-        yPercent: 45,
-        opacity: 0,
-        ease: "power3.out",
-        scrollTrigger: { trigger: root.current, start: "top 85%", end: "bottom bottom", scrub: 0.8 },
-      });
-    },
-    { scope: root },
-  );
-
+  const { openJoin } = useJoin();
   return (
-    <footer ref={root} className="footer">
+    <footer className="footer">
+      <div className="footer__cta">
+        <p className="footer__cta-line">Start your next release with KMF.</p>
+        <div className="footer__cta-actions">
+          <button type="button" className="footer__join" onClick={() => openJoin()} data-cursor="Join">
+            Join KMF <Icon name="upright" size={16} aria-hidden="true" />
+          </button>
+          <a className="footer__wa" href={site.whatsappLink} target="_blank" rel="noreferrer">
+            WhatsApp {site.whatsappDisplay}
+          </a>
+        </div>
+      </div>
       <nav className="footer__links" aria-label="Footer">
-        {links.map((l) => (
+        {allNav.map((l) => (
           <Link key={l.to} to={l.to} data-cursor="Open">
             {l.label}
           </Link>
         ))}
       </nav>
-      <div ref={mark} className="footer__mark" aria-hidden="true">
-        KMF Media
+      <div className="footer__mark" aria-hidden="true">
+        <VelocityType className="footer__word">KMF Media</VelocityType>
       </div>
-      <p className="footer__legal">© 2026 KMF Media Pvt. Ltd.</p>
+      <div className="footer__legal">
+        <p>© 2026 KMF Media Pvt. Ltd.</p>
+        <p className="mono" aria-hidden="true">
+          KMF-000 · Side B · 33 1/3 rpm
+        </p>
+      </div>
     </footer>
   );
 }

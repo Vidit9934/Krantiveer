@@ -1,3 +1,4 @@
+import { PaperScene } from "../../motion/PaperScene";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { PageHead } from "../../components/PageHead";
@@ -35,7 +36,8 @@ export default function Course() {
   return (
     <>
       <PageHead title={course.title} lede={course.summary} />
-      <div className="wrap section--tight grid grid--sidebar">
+      <PaperScene className="scene-paper" aria-label="Lessons">
+      <div className="wrap grid grid--sidebar">
         <div className="stack--lg">
           <div className="player" aria-label={`Lesson ${current + 1}: ${lessonTitles[current]}`}>
             {unlocked(current) ? (
@@ -90,7 +92,7 @@ export default function Course() {
 
         <aside className="panel panel--raised stack" aria-label="Lessons">
           <div>
-            <p className="small muted">{pct}% complete</p>
+            <p className="mono muted">{pct}% complete</p>
             <div className="progress" role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100} aria-label="Course progress">
               <i style={{ width: `${pct}%` }} />
             </div>
@@ -114,6 +116,7 @@ export default function Course() {
           )}
         </aside>
       </div>
+      </PaperScene>
     </>
   );
 }

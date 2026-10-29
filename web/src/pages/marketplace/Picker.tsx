@@ -1,3 +1,4 @@
+import { PaperScene } from "../../motion/PaperScene";
 import { useRef, useState } from "react";
 import { PageHead } from "../../components/PageHead";
 import { Button } from "../../components/Button";
@@ -40,11 +41,13 @@ export default function Picker() {
     return (
       <>
         <PageHead title="Booked" lede="Creators have 48 hours to confirm. Preview only." />
-        <div className="wrap section--tight">
-          <Button to="/marketplace" iconAfter="arrow">
-            Back to the marketplace
-          </Button>
-        </div>
+        <PaperScene className="scene-paper">
+          <div className="wrap">
+            <Button to="/marketplace" iconAfter="arrow">
+              Back to the marketplace
+            </Button>
+          </div>
+        </PaperScene>
       </>
     );
   }
@@ -53,7 +56,8 @@ export default function Picker() {
     return (
       <>
         <PageHead title="Checkout" lede="One GST invoice. Rates are never itemised." />
-        <div className="wrap wrap--read section--tight stack--lg">
+        <PaperScene className="scene-paper" aria-label="Checkout">
+        <div className="wrap wrap--read stack--lg">
           <div className="panel panel--raised stack">
             <p>{picked.length} creators selected for {campaign.title}.</p>
             <p className="tile__price">{inr(total)}</p>
@@ -68,6 +72,7 @@ export default function Picker() {
             </Button>
           </div>
         </div>
+        </PaperScene>
       </>
     );
   }
@@ -75,7 +80,8 @@ export default function Picker() {
   return (
     <>
       <PageHead title={`Applicants for ${campaign.title}`} lede="Profiles and audience quality, never prices." />
-      <div className="wrap section--tight grid grid--sidebar">
+      <PaperScene className="scene-paper" aria-label="Applicants">
+      <div className="wrap grid grid--sidebar">
         <ul className="creator-list">
           {creators.map((c) => {
             const on = picked.includes(c.id);
@@ -127,6 +133,7 @@ export default function Picker() {
           </Button>
         </aside>
       </div>
+      </PaperScene>
     </>
   );
 }

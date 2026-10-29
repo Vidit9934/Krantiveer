@@ -69,10 +69,10 @@ export function Disc({ catalog = "KMF-001", caption = "SIDE A", className = "" }
               <circle cx="300" cy="300" r="118" fill="url(#label-metal)" />
               <circle cx="300" cy="300" r="108" fill="none" stroke="#070605" strokeOpacity=".28" />
               <circle cx="300" cy="300" r="60" fill="none" stroke="#070605" strokeOpacity=".22" />
-              <text fill="#070605" fontSize="14" letterSpacing="3" fontFamily="Cormorant Garamond, serif" fontWeight="600">
+              <text fill="#070605" fontSize="14" letterSpacing="2" fontFamily="DM Mono, monospace" fontWeight="500">
                 <textPath href="#label-arc">{`KMF MEDIA  ${caption}  ${catalog}  33 1/3 RPM  `}</textPath>
               </text>
-              <text x="300" y="304" textAnchor="middle" fill="#070605" fontSize="40" fontWeight="600" fontFamily="Cormorant Garamond, serif">
+              <text x="300" y="304" textAnchor="middle" fill="#070605" fontSize="40" fontWeight="700" fontFamily="Bricolage Grotesque Variable, sans-serif">
                 KMF
               </text>
               <circle cx="300" cy="300" r="6" fill="#070605" />

@@ -1,10 +1,14 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { gsap, useGSAP } from "../motion/gsap";
 import { prefersReducedMotion } from "../motion/env";
 import { scrollControl } from "../motion/Smooth";
 import { useJoin } from "../context/JoinContext";
-import { allNav } from "../data/nav";
+import { navGroups } from "../data/nav";
+import type { NavItem } from "../data/nav";
+import { services } from "../data/services";
+import { regions } from "../data/site";
+import { Icon } from "./Icon";
 import { site } from "../data/site";
 
 interface MenuProps {
@@ -20,6 +24,14 @@ export function Menu({ open, onClose }: MenuProps) {
   const root = useRef<HTMLDivElement>(null);
   const first = useRef(true);
   const { openLogin } = useJoin();
+  const [exp, setExp] = useState<string | null>(null);
+
+  const itemsFor = (id: string): NavItem[] => {
+    if (id === "services") return [{ to: "/services", label: "All services" }, ...services.map((s) => ({ to: "/services", label: s.name, note: s.line }))];
+    if (id === "regional") return [{ to: "/regional", label: "All regions" }, ...regions.map((r) => ({ to: `/regional/${r.slug}`, label: `${r.name}  ${r.native}`, note: r.note }))];
+    if (id === "work") return [{ to: "/work", label: "All work" }];
+    return navGroups.find((g) => g.id === id)?.items ?? [];
+  };
 
   useEffect(() => {
     if (!open) return;
@@ -74,12 +86,36 @@ export function Menu({ open, onClose }: MenuProps) {
   return (
     <div ref={root} id="nav-sheet" className="sheet" aria-hidden={!open} inert={!open}>
       <nav className="sheet__links" aria-label="All pages">
-        {allNav.map((l) => (
-          <span key={l.to} className="sheet__mask">
-            <Link to={l.to} onClick={onClose} data-sheet-link>
-              {l.label}
-            </Link>
-          </span>
+        {navGroups.map((g) => (
+          <div key={g.id} className="sheet__group sheet__mask">
+            <div data-sheet-link>
+              {g.kind === "link" ? (
+                <Link to={g.to!} onClick={onClose} className="sheet__head">
+                  {g.label}
+                </Link>
+              ) : (
+                <>
+                  <button
+                    type="button"
+                    className="sheet__head"
+                    aria-expanded={exp === g.id}
+                    aria-controls={`sheet-${g.id}`}
+                    onClick={() => setExp((v) => (v === g.id ? null : g.id))}
+                  >
+                    {g.label} <Icon name="down" size={18} aria-hidden="true" />
+                  </button>
+                  <div className="sheet__sub" id={`sheet-${g.id}`} hidden={exp !== g.id}>
+                    {itemsFor(g.id).map((l) => (
+                      <Link key={l.label} to={l.to} onClick={onClose}>
+                        {l.label}
+                        {l.note && <span>{l.note}</span>}
+                      </Link>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
         ))}
       </nav>
       <div className="sheet__foot">

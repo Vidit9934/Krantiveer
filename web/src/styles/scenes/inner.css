@@ -1,0 +1,95 @@
+/* scene: inner. Owned by one agent; see DESIGN.md. */
+
+/* ---- Work: image-led cards on paper ---- */
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  gap: var(--s-3);
+  list-style: none;
+  padding: 0;
+}
+.work-card {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+.work-card__art {
+  aspect-ratio: 4 / 5;
+  height: auto;
+  border-radius: 20px;
+  transition: transform 0.5s var(--ease);
+}
+.work-card:hover .work-card__art {
+  transform: translateY(-6px);
+}
+.work-card__body {
+  display: grid;
+  gap: 2px;
+}
+.work-card__body strong {
+  font-size: var(--t-lg);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.work-card__body small,
+.work-card__body p {
+  font-size: var(--t-sm);
+  color: var(--muted);
+}
+.work-card__ref {
+  font-size: 0.6875rem;
+  color: var(--gold-text);
+}
+
+/* ---- Press rows with a thumbnail ---- */
+.post-row--art {
+  align-items: center;
+}
+.post-row__art {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  height: auto;
+  border-radius: 14px;
+}
+@media (min-width: 900px) {
+  .post-row--art {
+    grid-template-columns: 160px 150px 1.2fr 1fr;
+  }
+}
+
+/* ---- Regional cards with art ---- */
+.regional__art {
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border-radius: 16px;
+}
+@media (min-width: 900px) {
+  .regional {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--s-3);
+    border-top: 0;
+  }
+  .regional a.regional__card {
+    grid-template-columns: 1fr;
+    border-bottom: 0;
+    padding: 0;
+    align-content: start;
+    gap: 10px;
+  }
+}
+.regional__card .regional__name {
+  font-size: var(--t-row);
+}
+.regional__art {
+  aspect-ratio: 4 / 5;
+}
+@media (min-width: 900px) {
+  .regional {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+}
+.paper h2,
+.paper h3 {
+  font-weight: 650;
+}

@@ -12,6 +12,7 @@ interface LoginPanelProps {
 export function LoginPanel({ open, onClose, onJoin }: LoginPanelProps) {
   return (
     <Modal open={open} onClose={onClose} labelledBy="login-title" className="dialog__panel--small">
+      <p className="mono dialog__cat" aria-hidden="true">KMF-002 · Members</p>
       <h2 id="login-title">Member area opens soon</h2>
       <p className="muted">Until then, your KMF manager is one message away.</p>
       <div className="stack">

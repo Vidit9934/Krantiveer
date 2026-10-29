@@ -27,14 +27,20 @@
   background: none;
   cursor: pointer;
   font-size: var(--t-sm);
-  font-weight: 600;
+  font-weight: 500;
+  font-variation-settings: "wght" 520, "wdth" 100;
   color: var(--muted);
   text-decoration: none;
-  transition: color var(--dur) var(--ease);
+  transition: color var(--dur) var(--ease), font-variation-settings 0.6s var(--ease);
 }
+/* Hover: the word swells heavier and a little narrower, so the bar never shifts. */
 .nav__link:hover,
-.nav__link.active,
+.nav__link:focus-visible,
 .nav__more-btn[aria-expanded="true"] {
+  color: var(--gold-hi);
+  font-variation-settings: "wght" 700, "wdth" 90;
+}
+.nav__link.active {
   color: var(--gold-hi);
 }
 .nav__more {
@@ -63,6 +69,9 @@
 .nav__drop-link:hover {
   background: var(--surface-3);
 }
+.nav__drop-link strong {
+  font-weight: 560;
+}
 .nav__drop-link span {
   font-size: var(--t-xs);
   color: var(--muted);
@@ -80,12 +89,15 @@
   background: none;
   cursor: pointer;
   font-size: var(--t-sm);
-  font-weight: 600;
+  font-weight: 560;
+  font-variation-settings: "wght" 560, "wdth" 100;
   color: var(--ink);
-  transition: color var(--dur) var(--ease);
+  transition: color var(--dur) var(--ease), font-variation-settings 0.6s var(--ease);
 }
-.nav__login:hover {
+.nav__login:hover,
+.nav__login:focus-visible {
   color: var(--gold-hi);
+  font-variation-settings: "wght" 720, "wdth" 90;
 }
 .nav__join {
   min-height: 44px;
@@ -118,7 +130,7 @@
 .nav__burger[aria-expanded="true"] .nav__lines i:last-child {
   transform: translateY(-3px) rotate(-45deg);
 }
-@media (min-width: 1180px) {
+@media (min-width: 1100px) {
   .nav__links {
     display: flex;
   }
@@ -156,16 +168,18 @@
   display: block;
   padding: 14px 0;
   font-family: var(--font-display);
-  font-weight: 400;
-  font-size: 1.9rem;
+  font-weight: 700;
+  font-size: 1.5rem;
   line-height: 1.1;
+  letter-spacing: -0.03em;
+  font-variation-settings: "wght" 700, "wdth" 94;
   text-decoration: none;
-  transition: color var(--dur) var(--ease), padding-left 0.5s var(--ease);
+  transition: color var(--dur) var(--ease), padding-left 0.5s var(--ease), font-variation-settings 0.6s var(--ease);
 }
 .sheet__links a:hover,
 .sheet__links a:focus-visible {
   color: var(--gold-hi);
-  padding-left: 10px;
+  padding-left: 6px;
 }
 .sheet__foot {
   display: grid;
@@ -183,7 +197,7 @@
   font-weight: 600;
   color: var(--ink);
 }
-@media (min-width: 1180px) {
+@media (min-width: 1100px) {
   .sheet {
     display: none;
   }
@@ -211,7 +225,7 @@
   padding: clamp(24px, 4vw, 40px);
   background: var(--surface-1);
   border: 1px solid var(--rule);
-  border-radius: var(--r-md);
+  border-radius: 20px;
   box-shadow: 0 40px 100px rgb(0 0 0 / 0.7);
 }
 .dialog__panel--small {
@@ -219,9 +233,10 @@
 }
 .dialog__panel h2 {
   font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(2rem, 5vw, 2.8rem);
-  line-height: 1.05;
+  font-weight: 650;
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  line-height: 1;
+  letter-spacing: -0.026em;
   margin-bottom: var(--s-2);
   padding-right: 40px;
 }

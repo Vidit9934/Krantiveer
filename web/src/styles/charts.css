@@ -41,13 +41,37 @@
   order: -1;
 }
 
+/* Charts on paper: ink axes, gold-deep line. Chart.tsx hardcodes the area gradient's gold, so the
+   fill is overridden here (CSS beats the presentation attribute). */
+.paper .chart__axis {
+  stroke: color-mix(in srgb, var(--ink-paper) 55%, transparent);
+}
+.paper .chart__tick,
+.paper .chart__title {
+  fill: var(--muted-paper);
+  font-family: var(--font-mono);
+}
+.paper .chart__title {
+  font-weight: 500;
+}
+.paper .chart__line {
+  stroke: var(--gold-deep);
+}
+.paper .chart__dot {
+  fill: var(--paper);
+  stroke: var(--gold-deep);
+}
+.paper .chart path[data-area] {
+  fill: color-mix(in srgb, var(--gold-deep) 10%, transparent);
+}
+
 /* Releases on phones: smaller posters so the next one peeks in as the scene slides sideways. */
 @media (max-width: 899px) {
   .releases__intro {
     width: min(64vw, 300px);
   }
   .releases__intro h2 {
-    font-size: clamp(2.8rem, 14vw, 4.2rem);
+    font-size: clamp(2.6rem, 13vw, 4rem);
   }
   .poster {
     width: 66vw;

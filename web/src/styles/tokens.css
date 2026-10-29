@@ -11,22 +11,44 @@
   --bronze: #7c5c26;
   --signal: #d9573f;
 
+  /* Paper scenes: opaque warm-white panels between the dark ones. Gold text on paper uses gold-deep (AA). */
+  --paper: #f4f0e8;
+  --paper-2: #e9e3d6;
+  --ink-paper: #0b0a08;
+  --muted-paper: #5a5246;
+  --gold-deep: #7a5a1e;
+  --rule-paper: color-mix(in srgb, var(--ink-paper) 16%, transparent);
+  /* Fixed dark values, for a dark island inside paper (e.g. a phone preview) to restore. */
+  --ink-dark: #efe8da;
+  --muted-dark: #a89e8c;
+  --rule-dark: color-mix(in srgb, #7c5c26 60%, transparent);
+  --rule-soft-dark: color-mix(in srgb, #7c5c26 30%, transparent);
+  --surface-1-dark: #0e0c0a;
+  --surface-2-dark: #14110e;
+  --surface-3-dark: #1d1915;
+
   --rule: color-mix(in srgb, var(--bronze) 60%, transparent);
   --rule-soft: color-mix(in srgb, var(--bronze) 30%, transparent);
 
-  --font-display: "Cormorant Garamond", "Cormorant", Georgia, serif;
-  --font-body: "Manrope Variable", "Manrope", "Segoe UI", sans-serif;
+  --font-display: "Bricolage Grotesque Variable", "Bricolage Grotesque", "Segoe UI", sans-serif;
+  --font-body: "Bricolage Grotesque Variable", "Bricolage Grotesque", "Segoe UI", sans-serif;
+  --font-mono: "DM Mono", ui-monospace, "Cascadia Mono", monospace;
 
-  /* Type scale */
-  --t-xs: 0.8125rem;
-  --t-sm: 0.875rem;
+  /* Type scale. Bricolage sets wider and taller than the old serif, so the giant sizes come down. */
+  --t-xs: 0.75rem;
+  --t-sm: 0.8125rem;
   --t-base: 0.9375rem;
   --t-md: 1.0625rem;
-  --t-lg: 1.75rem;
-  --t-xl: 2.5rem;
-  --t-2xl: 3.5rem;
-  --t-giant: clamp(3.5rem, 11vw, 11rem);
-  --t-title: clamp(2.75rem, 7vw, 6.5rem);
+  --t-lg: 1.375rem;
+  --t-xl: 1.875rem;
+  --t-2xl: 2.5rem;
+  --t-giant: clamp(2.5rem, 5.2vw, 4.75rem);
+  --t-title: clamp(2.25rem, 4.6vw, 4.25rem);
+  --t-section: clamp(1.75rem, 3.2vw, 3rem);
+  --t-row: clamp(1.5rem, 2.6vw, 2.25rem);
+  --t-stat: clamp(2.75rem, 5.2vw, 4.75rem);
+  --w-display: 700;
+  --w-section: 650;
 
   --r-sm: 4px;
   --r-md: 8px;

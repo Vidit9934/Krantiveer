@@ -1,6 +1,6 @@
 ---
 name: premium-interactive-web
-description: Design and build premium, interactive, scroll-driven websites (luxury, music, film, product showcase) that feel subtle, classic and high-grade, with very few words, scrubbed scenes, layered atmosphere and a deliberate motion system. Use when the brief says premium, high-end, interactive, cinematic, Awwwards-level, "looks expensive", or when a page is text-heavy, flat or static and must be rebuilt as an experience. Pairs with avoid-ai-design (which polices defaults) and wins over it where the brief asks for motion and interaction.
+description: Design and build premium, interactive, scroll-driven websites (luxury, music, film, product showcase) that feel subtle, classic and high-grade, with very few words, scrubbed scenes, layered atmosphere and a deliberate motion system. Use when the brief says premium, high-end, interactive, cinematic, Awwwards-level, "looks expensive", 3D, WebGL, Three.js or a 3D product viewer, or when a page is text-heavy, flat or static and must be rebuilt as an experience. Pairs with avoid-ai-design (which polices defaults) and wins over it where the brief asks for motion and interaction.
 license: MIT
 metadata:
   version: "1.0.0"
@@ -11,7 +11,7 @@ metadata:
 
 A premium site is not a nicer-looking document. It is a short film the visitor scrolls through. This skill records the principles learned the hard way on the KMF Media build, where two polish passes on a text-heavy, card-based page failed and a rebuild around scenes succeeded.
 
-Read this together with `avoid-ai-design` (the catalog of defaults to avoid). Read `references/scene-patterns.md`, `motion-recipes.md`, `background-recipes.md`, `conversion-patterns.md` and `qa-checklist.md` before building.
+Read this together with `avoid-ai-design` (the catalog of defaults to avoid). Read `references/scene-patterns.md`, `motion-recipes.md`, `background-recipes.md`, `conversion-patterns.md` and `qa-checklist.md` before building. **If the brief involves 3D (WebGL, Three.js, a GLB model, a 3D scroll scene), also read `references/3d-web.md`.**
 
 **Lesson from the KMF build:** the first premium pass was loved for its feel and still failed to persuade, because it was almost wordless and hid its navigation. Beauty gets attention; the conversion layer gets enrollment.
 
@@ -47,4 +47,4 @@ Read this together with `avoid-ai-design` (the catalog of defaults to avoid). Re
 
 ## Stack (default)
 
-React + Vite + TypeScript, `gsap` (ScrollTrigger and SplitText are included in the free package), `@gsap/react`, `lenis`, plain CSS with tokens. No UI library. Fonts self-hosted through `@fontsource`. Add Three.js only when a true 3D object is required and name it as a dependency.
+React + Vite + TypeScript, `gsap` (ScrollTrigger and SplitText are included in the free package), `@gsap/react`, `lenis`, plain CSS with tokens. No UI library. Fonts self-hosted through `@fontsource`. Add Three.js (with `@react-three/fiber` and `@react-three/drei`) only when a true 3D object is required, name each as a dependency, and follow `references/3d-web.md` (decision gate, one clock, asset pipeline, budgets, fallback tiers).

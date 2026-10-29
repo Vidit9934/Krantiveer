@@ -7,12 +7,17 @@ import { Statement } from "./home/Statement";
 import { Path } from "./home/Path";
 import { Proof } from "./home/Proof";
 import { Results } from "./home/Results";
-import { Releases } from "./home/Releases";
-import { Doors } from "./home/Doors";
+import { ServicesList } from "./home/ServicesList";
+import { WorkBands } from "./home/WorkBands";
+import { Reel } from "./home/Reel";
+import { DepthCard } from "./home/DepthCard";
+import { RegionMap } from "./home/RegionMap";
 import { Estimator } from "./home/Estimator";
 import { Voices } from "./home/Voices";
 import { Faq } from "./home/Faq";
 import { Close } from "./home/Close";
+import { Ticker } from "./home/Ticker";
+import { Scene3D } from "../components/Scene3D";
 
 const dream = {
   a: "From a bedroom demo to a stage, a playlist, a name people sing back.",
@@ -29,15 +34,16 @@ const trustFacts = [
   "A dispute freezes the payout until it is settled.",
 ];
 
-/** The journey: promise, dream, path, proof, results, releases, doors, trust, estimator, voices, answers, close. */
+/** Dark scenes are the listening room; Path, Proof, Results, Estimator and FAQ are paper. The journey, staged around the 3D turntable fixed behind it (six beats, see DESIGN.md): promise, dream, path, proof, results, releases, doors, trust, estimator, voices, answers, close. */
 export default function Home() {
   usePageTitle("KMF Media");
   const { openJoin } = useJoin();
   const { side } = useSide();
   return (
     <>
+      <Scene3D />
       <Hero />
-      <Statement text={dream} label="The dream">
+      <Statement text={dream} label="The dream" beat={2} aside={<DepthCard />}>
         {side === "a" ? (
           <Button onClick={() => openJoin()} magnetic cursor="Join" iconAfter="arrow">
             Join KMF
@@ -48,11 +54,14 @@ export default function Home() {
           </Button>
         )}
       </Statement>
-      <Path />
-      <Proof />
+      <Ticker />
+      <ServicesList />
+      <WorkBands />
+      <Reel />
       <Results />
-      <Releases />
-      <Doors />
+      <Proof />
+      <Path />
+      <RegionMap />
       <Statement text={promise} label="Our promise">
         <ul className="facts">
           {trustFacts.map((f) => (

@@ -1,12 +1,13 @@
 import { SplitLines } from "../../motion/SplitLines";
 import { platforms, press, roster } from "../../data/proof";
+import { PaperScene } from "../../motion/PaperScene";
 
 /** Roster ribbon, platforms and press. Everything unconfirmed is tagged. Pauses on hover and focus. */
 export function Proof() {
   const anyPlaceholder = roster.some((r) => !r.confirmed) || press.some((p) => !p.confirmed);
   const tiles = [...roster, ...roster];
   return (
-    <section className="proof" aria-labelledby="proof-title">
+    <PaperScene className="proof" aria-labelledby="proof-title">
       <div className="proof__head">
         <SplitLines as="h2" text="Artists who trusted the plan." className="proof__title" id="proof-title" />
         {anyPlaceholder && <span className="ph">placeholder names, to be replaced with approved artists</span>}
@@ -40,6 +41,6 @@ export function Proof() {
           ))}
         </ul>
       </div>
-    </section>
+    </PaperScene>
   );
 }

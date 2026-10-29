@@ -1,3 +1,4 @@
+import { PaperScene } from "../../motion/PaperScene";
 import { useState } from "react";
 import { PageHead } from "../../components/PageHead";
 import { Button } from "../../components/Button";
@@ -32,12 +33,14 @@ export default function CreatorApply() {
     return (
       <>
         <PageHead title="Application sent" lede="A manager reviews every creator." />
-        <div className="wrap section--tight stack">
+        <PaperScene className="scene-paper">
+        <div className="wrap stack">
           <p className="muted">Once approved, your rate locks for 90 days. After that you can request a change, which goes back through review. PAN and bank or UPI details are collected before your first payout.</p>
           <Button to="/marketplace" iconAfter="arrow">
             Back to the marketplace
           </Button>
         </div>
+        </PaperScene>
       </>
     );
   }
@@ -45,10 +48,11 @@ export default function CreatorApply() {
   return (
     <>
       <PageHead title="Apply as a creator" lede="Build a profile and set your rate per reel." />
-      <div className="wrap wrap--read section--tight stack--lg">
+      <PaperScene className="scene-paper" aria-label="Creator application">
+      <div className="wrap wrap--read stack--lg">
         <ol className="row" aria-label="Application steps" style={{ gap: 8 }}>
           {steps.map((s, i) => (
-            <li key={s} className={`tag${i === step ? " tag--gold" : ""}`} aria-current={i === step ? "step" : undefined}>
+            <li key={s} className={`tag mono${i === step ? " tag--gold" : ""}`} aria-current={i === step ? "step" : undefined}>
               {i + 1}. {s}
             </li>
           ))}
@@ -133,6 +137,7 @@ export default function CreatorApply() {
           </div>
         </div>
       </div>
+      </PaperScene>
     </>
   );
 }

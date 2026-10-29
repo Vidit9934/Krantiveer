@@ -1,7 +1,9 @@
+import { PaperScene } from "../motion/PaperScene";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { PageHead } from "../components/PageHead";
 import { Button } from "../components/Button";
+import { Art } from "../components/Art";
 import { posts } from "../data/site";
 import { longDate } from "../lib/format";
 
@@ -25,9 +27,10 @@ export function PressIndex() {
           ))}
         </div>
         <div className="posts">
-          {shown.map((p) => (
-            <Link key={p.slug} to={`/press/${p.slug}`} className="post-row">
-              <span className="muted small">
+          {shown.map((p, i) => (
+            <Link key={p.slug} to={`/press/${p.slug}`} className="post-row post-row--art">
+              <Art slot={["svc-press", "work-5", "work-6", "work-7"][i % 4]} className="post-row__art" tag={false} />
+              <span className="mono post-row__date">
                 {longDate(p.date)}, {p.category}
               </span>
               <h3>{p.title}</h3>
@@ -35,15 +38,18 @@ export function PressIndex() {
             </Link>
           ))}
         </div>
+      </div>
+      <PaperScene className="scene-paper" aria-label="Newsletter">
+      <div className="wrap">
         <form
-          className="panel panel--raised stack"
+          className="stack press-news"
           onSubmit={(e) => {
             e.preventDefault();
             if (valid) setSent(true);
           }}
           noValidate
         >
-          <h2 style={{ fontSize: "1.5rem" }}>The KMF Press newsletter</h2>
+          <h2 style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)" }}>The KMF Press newsletter</h2>
           {sent ? (
             <p role="status">Thanks. This is a preview, so nothing was sent. On the live site you would get a confirmation email.</p>
           ) : (
@@ -60,6 +66,7 @@ export function PressIndex() {
           )}
         </form>
       </div>
+      </PaperScene>
     </>
   );
 }
@@ -80,7 +87,8 @@ export function Article() {
   return (
     <>
       <PageHead title={post.title} lede={`${post.category}. By ${post.author}, ${longDate(post.date)}.${post.sponsored ? " Sponsored feature." : ""}`} />
-      <article className="wrap wrap--read section--tight stack--lg">
+      <PaperScene className="scene-paper">
+      <article className="wrap wrap--read stack--lg">
         {post.body.map((para, i) => (
           <p key={i} style={{ fontSize: "1.1875rem", maxWidth: "62ch" }}>
             {para}
@@ -90,6 +98,7 @@ export function Article() {
           Back to KMF Press
         </Button>
       </article>
+      </PaperScene>
     </>
   );
 }

@@ -1,15 +1,21 @@
 import { useRef } from "react";
+import { useLocation } from "react-router-dom";
 import { ScrollTrigger, useGSAP } from "../motion/gsap";
 import { prefersReducedMotion } from "../motion/env";
+import { useStageTier } from "../motion/stage";
 import { DustField } from "./DustField";
 
 /**
  * The room: layered, fixed behind every page. Gradient ground, two drifting warm lights,
  * dust, a vignette and film grain. Scroll progress is written to --p so the glow travels
- * down the page and the ground warms between scenes.
+ * down the page and the ground warms between scenes. On home, while the 3D stage runs, its WebGL
+ * dust replaces the CSS dust canvas (never both).
  */
 export function Atmosphere() {
   const root = useRef<HTMLDivElement>(null);
+  const { pathname } = useLocation();
+  const tier = useStageTier();
+  const webglDust = pathname === "/" && tier !== "static";
 
   useGSAP(
     () => {
@@ -31,7 +37,7 @@ export function Atmosphere() {
         <div className="atmos__blob atmos__blob--a" />
         <div className="atmos__blob atmos__blob--b" />
         <div className="atmos__glow" />
-        <DustField />
+        {!webglDust && <DustField />}
         <div className="atmos__vignette" />
       </div>
       <div className="grain" aria-hidden="true" />

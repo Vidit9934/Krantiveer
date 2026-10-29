@@ -40,6 +40,15 @@ Run this before calling a premium build done. Items marked (measured) need a scr
 - [ ] No-JS: static, readable content.
 - [ ] Keyboard: visible focus, menu operable, no traps.
 
+## 3D gates (only when the build uses WebGL; detail in `3d-web.md`)
+
+- [ ] (measured) `renderer.info` draw calls, triangles and textures logged per beat and within the budget table (defaults, tune per project).
+- [ ] (measured) p95 frame time during a scripted full-page scroll: about 16.7ms desktop; about 33ms at 390px with 4x CPU throttle.
+- [ ] (measured) Canvas is not blank in the screenshot of every beat at 1440, 1024 and 390.
+- [ ] Reduced motion and WebGL-disabled runs both show posters and complete readable content; `webglcontextlost` falls back to the static tier.
+- [ ] No WebGL or shader console errors; the 3D chunk is lazy-loaded and its weight is recorded; first paint does not wait for WebGL.
+- [ ] One hero object, tied to the product; none of the 3D slop in `3d-web.md` section 10.
+
 ## Build
 
 - [ ] `tsc` and the production build pass; zero console errors.

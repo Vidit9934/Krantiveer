@@ -1,3 +1,4 @@
+import { PaperScene } from "../motion/PaperScene";
 import { PageHead } from "../components/PageHead";
 import { Button } from "../components/Button";
 
@@ -5,7 +6,8 @@ export default function Founder() {
   return (
     <>
       <PageHead title="The founder" lede="Started by Kranti. Story and milestones to come." />
-      <div className="wrap section--tight grid" style={{ gridTemplateColumns: "minmax(0,1fr)" }}>
+      <PaperScene className="scene-paper" aria-label="Founder">
+      <div className="wrap grid" style={{ gridTemplateColumns: "minmax(0,1fr)" }}>
         <div className="founder">
           <div className="founder__plate">
             <span>
@@ -51,6 +53,7 @@ export default function Founder() {
           </div>
         </div>
       </div>
+      </PaperScene>
     </>
   );
 }

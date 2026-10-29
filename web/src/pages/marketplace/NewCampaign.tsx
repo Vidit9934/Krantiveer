@@ -1,3 +1,4 @@
+import { PaperScene } from "../../motion/PaperScene";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PageHead } from "../../components/PageHead";
@@ -24,7 +25,8 @@ export default function NewCampaign() {
   return (
     <>
       <PageHead title="Post a campaign" lede="Your budget stays hidden from creators." />
-      <div className="wrap wrap--read section--tight">
+      <PaperScene className="scene-paper" aria-label="Campaign form">
+      <div className="wrap wrap--read">
         <form
           className="panel form-grid"
           noValidate
@@ -85,6 +87,7 @@ export default function NewCampaign() {
           </div>
         </form>
       </div>
+      </PaperScene>
     </>
   );
 }

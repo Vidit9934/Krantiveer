@@ -1,7 +1,9 @@
+import { PaperScene } from "../motion/PaperScene";
 import { Link, useParams } from "react-router-dom";
 import { PageHead } from "../components/PageHead";
 import { Button } from "../components/Button";
 import { Cover } from "../components/Cover";
+import { Art } from "../components/Art";
 import { regions, releases } from "../data/site";
 
 export function RegionalHub() {
@@ -10,8 +12,9 @@ export function RegionalHub() {
       <PageHead title="Regional music" lede="Five languages, each with its own audience and rhythm." />
       <div className="wrap wrap--index section--tight">
         <div className="regional">
-          {regions.map((r) => (
-            <Link key={r.slug} to={`/regional/${r.slug}`} data-cursor="Open">
+          {regions.map((r, i) => (
+            <Link key={r.slug} to={`/regional/${r.slug}`} data-cursor="Open" className="regional__card">
+              <Art slot={["work-1", "work-2", "work-4", "work-7", "svc-regional"][i]} className="regional__art" />
               <span className="regional__name">{r.name}</span>
               <p>{r.note}</p>
             </Link>
@@ -39,15 +42,16 @@ export function RegionalPage() {
   return (
     <>
       <PageHead title={region.name} lede={region.note} />
-      <div className="wrap wrap--index section--tight stack--lg">
+      <PaperScene className="scene-paper" aria-label={`${region.name} notes`}>
+      <div className="wrap wrap--index stack--lg">
         <section className="stack" aria-labelledby="where">
-          <h2 id="where" style={{ fontSize: "var(--t-lg)", fontWeight: 500 }}>
+          <h2 id="where" style={{ fontSize: "var(--t-lg)", fontWeight: 650 }}>
             Where listeners are
           </h2>
           <p className="muted">{region.platforms}</p>
         </section>
         <section className="stack" aria-labelledby="cases">
-          <h2 id="cases" style={{ fontSize: "var(--t-lg)", fontWeight: 500 }}>
+          <h2 id="cases" style={{ fontSize: "var(--t-lg)", fontWeight: 650 }}>
             Releases
           </h2>
           {related.length === 0 ? (
@@ -65,6 +69,9 @@ export function RegionalPage() {
             ))
           )}
         </section>
+      </div>
+      </PaperScene>
+      <div className="wrap wrap--index section">
         <div className="row">
           <Button to="/marketplace" iconAfter="arrow" magnetic>
             Find {region.name} creators

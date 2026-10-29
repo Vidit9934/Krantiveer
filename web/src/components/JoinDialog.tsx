@@ -127,6 +127,7 @@ export function JoinDialog({ open, prefill, onClose }: JoinDialogProps) {
       ) : (
         <form className="stack" onSubmit={submit} noValidate>
           <div>
+            <p className="mono dialog__cat" aria-hidden="true">KMF-001 · Side A · 60 seconds</p>
             <h2 id={`${uid}-title`}>Join KMF</h2>
             <p className="muted">Sixty seconds. Nothing is saved on this page.</p>
           </div>

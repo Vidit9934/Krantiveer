@@ -1,3 +1,4 @@
+import { PaperScene } from "../motion/PaperScene";
 import { useState } from "react";
 import type { FormEvent } from "react";
 import { PageHead } from "../components/PageHead";
@@ -29,7 +30,8 @@ export default function Contact() {
   return (
     <>
       <PageHead title="Talk to the KMF team" lede="Tell us about your release. WhatsApp is quickest." />
-      <div className="wrap section--tight grid grid--sidebar">
+      <PaperScene className="scene-paper" aria-label="Contact form">
+      <div className="wrap grid grid--sidebar">
         {sent ? (
           <div className="panel stack" role="status">
             <h2>Message noted</h2>
@@ -85,6 +87,7 @@ export default function Contact() {
           <p className="muted small">Email: {site.email} <span className="ph">placeholder</span></p>
         </aside>
       </div>
+      </PaperScene>
     </>
   );
 }

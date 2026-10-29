@@ -30,6 +30,8 @@ export function Cursor() {
       const text = labelled?.dataset.cursor ?? "";
       if (label.current) label.current.textContent = text;
       el.classList.toggle("is-label", Boolean(text));
+      el.classList.toggle("on-paper", Boolean(target?.closest(".paper, .scene-paper")));
+      el.classList.toggle("on-gold", Boolean(target?.closest("[data-surface='gold'], .scene-close, .footer__cta, .btn--primary, .tag--gold")));
       el.classList.toggle("is-hot", Boolean(interactive) && !text);
     };
     const onLeave = () => gsap.to(el, { autoAlpha: 0, duration: 0.3 });

@@ -1,3 +1,4 @@
+import { PaperScene } from "../motion/PaperScene";
 import { PageHead } from "../components/PageHead";
 import { Icon } from "../components/Icon";
 import { Button } from "../components/Button";
@@ -14,7 +15,8 @@ export default function Policy() {
   return (
     <>
       <PageHead title="No bots. No fake streams." lede="Fake plays get artists flagged. Here is how KMF stays clean." />
-      <div className="wrap section--tight stack--lg">
+      <PaperScene className="scene-paper" aria-label="The rules">
+      <div className="wrap">
         <ul className="rule-list">
           {rules.map((r) => (
             <li key={r.title}>
@@ -26,6 +28,9 @@ export default function Policy() {
             </li>
           ))}
         </ul>
+      </div>
+      </PaperScene>
+      <div className="wrap section stack--lg">
         <div className="notice stack">
           <p>
             <strong>What we cannot promise.</strong> Platforms do not hand outside tools per-artist stream numbers, so Spotify figures in your reports come from your own Spotify for Artists export. We say so in every report.

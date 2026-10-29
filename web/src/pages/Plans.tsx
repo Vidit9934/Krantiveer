@@ -1,3 +1,4 @@
+import { PaperScene } from "../motion/PaperScene";
 import { useMemo, useState } from "react";
 import { PageHead } from "../components/PageHead";
 import { Button } from "../components/Button";
@@ -48,11 +49,13 @@ export default function Plans() {
     return (
       <>
         <PageHead title="Order received" lede="Preview only. No payment was taken." />
-        <div className="wrap section--tight">
-          <Button to="/" iconAfter="arrow">
-            Back to the homepage
-          </Button>
-        </div>
+        <PaperScene className="scene-paper">
+          <div className="wrap">
+            <Button to="/" iconAfter="arrow">
+              Back to the homepage
+            </Button>
+          </div>
+        </PaperScene>
       </>
     );
   }
@@ -63,7 +66,8 @@ export default function Plans() {
         title="Plans and store"
         lede="Placeholder pricing in rupees."
       />
-      <div className="wrap section--tight grid grid--sidebar">
+      <PaperScene className="scene-paper" aria-label="Choose a plan">
+      <div className="wrap grid grid--sidebar">
         <div className="stack--lg">
           <fieldset className="field" style={{ border: 0, padding: 0, margin: 0 }}>
             <legend className="sr-only">Choose a plan</legend>
@@ -170,6 +174,7 @@ export default function Plans() {
           )}
         </aside>
       </div>
+      </PaperScene>
     </>
   );
 }

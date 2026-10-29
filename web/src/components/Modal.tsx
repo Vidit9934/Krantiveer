@@ -67,7 +67,7 @@ export function Modal({ open, onClose, labelledBy, children, className = "" }: M
   return (
     <div className="dialog" role="presentation">
       <div ref={backdrop} className="dialog__backdrop" onClick={onClose} />
-      <div ref={panel} className={`dialog__panel ${className}`} role="dialog" aria-modal="true" aria-labelledby={labelledBy}>
+      <div ref={panel} className={`dialog__panel paper ${className}`} role="dialog" aria-modal="true" aria-labelledby={labelledBy}>
         <button type="button" className="dialog__close" onClick={onClose} aria-label="Close" data-cursor="Close">
           <Icon name="close" size={20} />
         </button>

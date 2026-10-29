@@ -26,7 +26,9 @@ body {
   color: var(--ink);
   font-family: var(--font-body);
   font-size: var(--t-base);
-  line-height: 1.65;
+  line-height: 1.6;
+  font-optical-sizing: auto;
+  font-variation-settings: "wdth" 100;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
@@ -38,23 +40,26 @@ h3,
 h4 {
   font-family: var(--font-display);
   font-weight: 400;
-  line-height: 1.02;
-  letter-spacing: -0.02em;
+  line-height: 1;
+  letter-spacing: -0.04em;
   margin: 0;
   text-wrap: balance;
 }
 h1 {
-  font-weight: 300;
+  font-weight: var(--w-display);
   font-size: var(--t-title);
+  font-variation-settings: "wdth" 92;
 }
 h2 {
-  font-weight: 300;
-  font-size: clamp(2rem, 4vw, var(--t-2xl));
+  font-weight: var(--w-section);
+  font-size: var(--t-section);
+  font-variation-settings: "wdth" 94;
 }
 h3 {
-  font-weight: 500;
+  font-weight: 600;
   font-size: var(--t-lg);
-  line-height: 1.1;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
 }
 h4 {
   font-family: var(--font-body);
@@ -97,6 +102,87 @@ ol {
 table {
   border-collapse: collapse;
   width: 100%;
+}
+
+/* Small-caps eyebrow, as in the references ("BROWSE BY SERVICE"). Brief-driven: avoid-ai-design-ignore T5/SD4 */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.paper .eyebrow {
+  color: var(--gold-deep);
+}
+/* Highlighter chip on a key word, as in AJ Marketing: a box behind the word. Brief-driven: avoid-ai-design-ignore (one-word emphasis) */
+.hl {
+  display: inline-block;
+  padding: 0.04em 0.28em 0.1em;
+  margin: 0 0.04em;
+  background: var(--ink-paper);
+  color: var(--paper);
+  border-radius: 0.14em;
+  line-height: 1.05;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.hl--gold {
+  background: var(--gold);
+  color: var(--ink-paper);
+}
+.paper .hl {
+  background: var(--ink-paper);
+  color: var(--paper);
+}
+.paper .hl--gold {
+  background: var(--gold);
+  color: var(--ink-paper);
+}
+
+/* ---- Art: one image slot (real media or generated placeholder) ---- */
+.art {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+.art--fill {
+  width: 100%;
+  height: 100%;
+}
+.art svg,
+.art img,
+.art video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.art__tag {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  padding: 1px 7px;
+  border: 1px dashed currentColor;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  line-height: 1.5;
+  color: var(--ink-paper);
+  background: color-mix(in srgb, var(--paper) 82%, transparent);
+}
+.art[data-tone="black"] .art__tag {
+  color: var(--ink);
+  background: color-mix(in srgb, var(--ground) 80%, transparent);
+}
+
+/* Record-label details: catalogue numbers, rpm, step numbers, axis labels. Never body text. */
+.mono {
+  font-family: var(--font-mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.02em;
+  font-weight: 400;
 }
 
 table,
@@ -144,6 +230,80 @@ input[type="checkbox"] {
 }
 .skip-link:focus {
   top: 12px;
+}
+
+/* ---- Paper scenes: opaque warm white over the 3D stage ---- */
+.paper {
+  position: relative;
+  background: var(--paper);
+  color: var(--ink-paper);
+  --ink: var(--ink-paper);
+  --muted: var(--muted-paper);
+  --rule: var(--rule-paper);
+  --rule-soft: color-mix(in srgb, var(--ink-paper) 9%, transparent);
+  --surface-1: var(--paper-2);
+  --surface-2: color-mix(in srgb, var(--paper-2) 80%, var(--ink-paper) 4%);
+  --surface-3: color-mix(in srgb, var(--paper-2) 70%, var(--ink-paper) 8%);
+  --gold-text: linear-gradient(120deg, var(--gold-deep) 0%, #9c7426 50%, var(--gold-deep) 100%);
+}
+.paper ::selection {
+  background: var(--ink-paper);
+  color: var(--paper);
+}
+.paper :focus-visible {
+  outline-color: var(--gold-deep);
+}
+
+/* ---- Reactive type: letters with their own variable axes ---- */
+.rtype {
+  display: inline;
+}
+.rtype__word {
+  display: inline-block;
+  white-space: nowrap;
+}
+.rtype__mask {
+  display: inline-block;
+  overflow: clip;
+  overflow-clip-margin: 0.12em;
+  vertical-align: top;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+.rtype__ch {
+  display: inline-block;
+  will-change: transform;
+}
+.vtype {
+  display: inline-block;
+  transform-origin: 0 100%;
+  will-change: transform;
+}
+
+/* ---- Spin badge: DM Mono text on a turning ring ---- */
+.spinbadge {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  color: currentColor;
+}
+.spinbadge svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.spinbadge text {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.04em;
+  fill: currentColor;
+}
+.spinbadge__core {
+  display: grid;
+  place-items: center;
 }
 
 /* Text that animates in as lines: the mask must clip, never wrap oddly. */

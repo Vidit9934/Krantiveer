@@ -1,3 +1,4 @@
+import { PaperScene } from "../../motion/PaperScene";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { PageHead } from "../../components/PageHead";
@@ -95,7 +96,8 @@ export default function Builder() {
           </div>
         }
       />
-      <div className="wrap wrap--wide section--tight builder">
+      <PaperScene className="scene-paper" aria-label="Builder">
+      <div className="wrap wrap--wide builder">
         <div className="stack--lg">
           {saved && (
             <p className="notice" role="status">
@@ -226,6 +228,7 @@ export default function Builder() {
           </div>
         </aside>
       </div>
+      </PaperScene>
     </>
   );
 }

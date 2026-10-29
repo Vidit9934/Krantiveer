@@ -1,4 +1,6 @@
-/* Conversion scenes: path, proof, results, estimator, voices, FAQ. Loaded after home.css. */
+/* Conversion scenes: path, proof, results, estimator, voices, FAQ. Loaded after home.css.
+   Path, Proof, Results, Estimator and FAQ are paper scenes (ink on warm white, gold-deep accents,
+   hairline rules); inside .paper the --ink, --muted, --rule and --gold-text tokens are re-pointed. */
 /* avoid-ai-design-ignore-file: C6, L4
    C6: gold figures use the brand gold token as flat colour. L4: the stat figures are placeholder-tagged until KMF confirms them. */
 
@@ -14,28 +16,27 @@
   border-left: 1px solid var(--gold);
 }
 
+/* Paper scenes run full bleed; the content keeps a 1440px measure inside. */
 .path,
 .proof,
 .results,
 .estimator,
 .faq {
-  max-width: 1440px;
-  margin-inline: auto;
-  padding: clamp(72px, 12vh, 140px) var(--gutter);
+  padding: clamp(80px, 14vh, 160px) max(var(--gutter), calc((100% - 1440px) / 2 + var(--gutter)));
 }
 .path__title,
 .proof__title,
 .results__title,
 .estimator__title,
 .faq__title {
-  font-size: clamp(2.2rem, 5.2vw, 5rem);
-  line-height: 1;
-  letter-spacing: -0.03em;
-  font-weight: 300;
-  max-width: 16ch;
+  font-size: clamp(2.3rem, 5vw, 4.9rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  font-weight: 650;
+  max-width: 15ch;
 }
 
-/* Path */
+/* ---------- Path: a tracklist, A1 to B2 ---------- */
 .path {
   display: grid;
   gap: var(--s-5);
@@ -49,83 +50,54 @@
 .path__list {
   position: relative;
   display: grid;
-  gap: clamp(140px, 34vh, 340px);
-  padding-left: 56px;
-  padding-block: 12vh;
+  border-bottom: 1px solid var(--rule);
 }
+/* The old progress rail is not part of a tracklist; the hairlines carry the sequence. */
 .path__rail {
-  position: absolute;
-  left: 15px;
-  top: 8px;
-  bottom: 8px;
-  width: 1px;
-  background: var(--rule-soft);
-}
-.path__line {
-  position: absolute;
-  inset: 0;
-  background: var(--gold);
-  transform-origin: top;
+  display: none;
 }
 .path__step {
   position: relative;
   display: grid;
-  gap: 4px;
-  opacity: 0.28;
-  transition: opacity 0.7s var(--ease), transform 0.9s var(--ease);
+  grid-template-columns: clamp(52px, 6vw, 88px) minmax(0, 1fr);
+  align-items: baseline;
+  gap: var(--s-3);
+  padding-block: clamp(28px, 7vh, 72px);
+  border-top: 1px solid var(--rule);
+  opacity: 0.34;
+  transition: opacity 0.7s var(--ease);
 }
 .path__step.is-on {
-  opacity: 0.62;
+  opacity: 0.7;
 }
 .path__step.is-now {
   opacity: 1;
-  transform: translateX(10px);
-}
-.path__step h3 {
-  transition: color 0.7s var(--ease), text-shadow 0.9s var(--ease);
-}
-.path__step.is-now h3 {
-  color: var(--gold-hi);
-  text-shadow: 0 0 28px rgb(236 212 147 / 0.45), 0 0 70px rgb(201 162 75 / 0.25);
-}
-.path__step.is-now .path__n {
-  background: var(--gold);
-  border-color: var(--gold-hi);
-  color: var(--ground);
-  box-shadow: 0 0 22px rgb(236 212 147 / 0.55);
-}
-.path__step.is-on .path__n {
-  border-color: var(--gold);
 }
 .path__n {
-  position: absolute;
-  left: -56px;
-  top: 4px;
-  display: grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  border: 1px solid var(--bronze);
-  border-radius: 50%;
-  background: var(--ground);
-  font-size: var(--t-sm);
-  color: var(--gold-hi);
-  transition: background 0.6s var(--ease), box-shadow 0.8s var(--ease), border-color 0.6s var(--ease), color 0.6s var(--ease);
+  font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+  font-weight: 500;
+  color: var(--gold-deep);
 }
 .path__step h3 {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(1.9rem, 4vw, 3.4rem);
-  line-height: 1.05;
+  font-size: clamp(1.8rem, 3.4vw, 3.1rem);
+  line-height: 1.04;
+  letter-spacing: -0.018em;
+  transition: color 0.7s var(--ease);
+}
+.path__step.is-now h3 {
+  color: var(--gold-deep);
 }
 .path__step p {
+  margin-top: 6px;
   color: var(--muted);
   max-width: 40ch;
 }
 @media (min-width: 900px) {
   .path {
-    grid-template-columns: 1fr 1.1fr;
-    gap: 8vw;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 7vw;
   }
   .path__head {
     position: sticky;
@@ -134,17 +106,20 @@
   }
 }
 
-/* Proof */
+/* ---------- Proof ---------- */
 .proof {
   display: grid;
   gap: var(--s-4);
   padding-inline: 0;
 }
+.proof__head,
+.proof__base {
+  padding-inline: max(var(--gutter), calc((100% - 1440px) / 2 + var(--gutter)));
+}
 .proof__head {
   display: grid;
   gap: var(--s-3);
   justify-items: start;
-  padding-inline: var(--gutter);
 }
 .ribbon {
   overflow: hidden;
@@ -174,48 +149,55 @@
   width: 240px;
   min-height: 190px;
   padding: var(--s-3);
-  border: 1px solid var(--rule-soft);
+  border: 1px solid var(--rule);
   border-radius: var(--r-md);
-  background: linear-gradient(160deg, var(--surface-2), var(--surface-1));
+  background: var(--paper-2);
 }
 .ribbon__tile strong {
   font-family: var(--font-display);
-  font-weight: 400;
-  font-size: 1.5rem;
+  font-weight: 450;
+  font-size: 1.45rem;
+  letter-spacing: -0.02em;
 }
 .ribbon__tile span:last-child {
   color: var(--muted);
   font-size: var(--t-xs);
 }
+/* A tiny record label as the monogram. */
 .ribbon__mono {
   align-self: start;
   margin-bottom: auto;
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
-  background: var(--gold-metal);
-  color: var(--ground);
+  background: radial-gradient(circle, var(--ink-paper) 0 6%, transparent 7%), var(--gold-metal);
+  box-shadow: 0 0 0 5px var(--ink-paper);
+  color: var(--ink-paper);
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 .proof__base {
   display: grid;
   gap: var(--s-2) var(--s-4);
-  padding-inline: var(--gutter);
 }
 .proof__label {
-  color: var(--muted);
-  font-size: var(--t-sm);
+  font-family: var(--font-mono);
+  color: var(--gold-deep);
+  font-size: var(--t-xs);
   margin-top: var(--s-3);
+  padding-top: var(--s-2);
+  border-top: 1px solid var(--rule);
 }
 .proof__list {
   display: flex;
   flex-wrap: wrap;
   gap: 4px var(--s-4);
   font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.04em;
   font-size: clamp(1.5rem, 2.6vw, 2.2rem);
   color: var(--ink);
 }
@@ -223,10 +205,11 @@
   color: var(--muted);
 }
 
-/* Results: one figure dominates */
+/* ---------- Results: one figure dominates ---------- */
 .results {
   display: grid;
   gap: var(--s-5);
+  padding-top: clamp(40px, 6vh, 72px);
 }
 .results__grid {
   display: grid;
@@ -237,7 +220,9 @@
   margin: 0;
   display: grid;
   gap: var(--s-2);
-  color: var(--gold);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--rule);
+  color: var(--gold-deep);
 }
 .spark {
   width: 100%;
@@ -250,19 +235,24 @@
 }
 .stat__value {
   font-family: var(--font-display);
-  font-weight: 300;
-  line-height: 0.95;
-  letter-spacing: -0.03em;
-  color: var(--gold-hi);
+  font-weight: 650;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  color: var(--ink);
 }
 .stat--0 .stat__value {
-  font-size: clamp(5rem, 16vw, 14rem);
+  font-size: clamp(4.6rem, 14vw, 12.5rem);
+  background: var(--gold-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-bottom: 0.04em;
 }
 .stat--1 .stat__value {
-  font-size: clamp(3rem, 7vw, 6rem);
+  font-size: clamp(2.8rem, 6vw, 5.4rem);
 }
 .stat--2 .stat__value {
-  font-size: clamp(2.4rem, 5vw, 4.4rem);
+  font-size: clamp(2.3rem, 4.6vw, 4rem);
 }
 .stat__label {
   max-width: 28ch;
@@ -274,13 +264,14 @@
   gap: var(--s-2);
   max-width: 56ch;
   padding-left: var(--s-3);
-  border-left: 1px solid var(--gold);
+  border-left: 2px solid var(--gold-deep);
 }
 .results__story h3 {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(1.8rem, 3.4vw, 2.8rem);
-  line-height: 1.1;
+  font-size: clamp(1.7rem, 3vw, 2.6rem);
+  line-height: 1.08;
+  letter-spacing: -0.018em;
 }
 .results__story p {
   color: var(--muted);
@@ -291,7 +282,7 @@
   }
 }
 
-/* Estimator */
+/* ---------- Estimator ---------- */
 .estimator {
   display: grid;
   gap: var(--s-5);
@@ -319,6 +310,7 @@
   display: flex;
   justify-content: space-between;
   color: var(--muted);
+  font-family: var(--font-mono);
   font-size: var(--t-xs);
 }
 .estimator__result {
@@ -337,9 +329,10 @@
 }
 .estimator__plan {
   font-family: var(--font-display);
-  font-weight: 300;
+  font-weight: 650;
   font-size: clamp(2.4rem, 5vw, 4.2rem);
   line-height: 1;
+  letter-spacing: -0.04em;
   color: var(--gold-hi);
 }
 .estimator__figure {
@@ -348,7 +341,7 @@
 .estimator__figure strong {
   font-family: var(--font-display);
   font-size: 1.8em;
-  font-weight: 400;
+  font-weight: 450;
   color: var(--gold-hi);
 }
 .estimator__result .btn {
@@ -360,8 +353,32 @@
     gap: 6vw;
   }
 }
+/* On paper: ink chips, and the result is a dark record sleeve so the plan reads like a label. */
+.paper .chip {
+  border-color: color-mix(in srgb, var(--ink-paper) 28%, transparent);
+  color: var(--ink);
+}
+.paper .chip:hover {
+  border-color: var(--ink-paper);
+}
+.paper .chip[aria-checked="true"] {
+  border-color: var(--ink-paper);
+  background: var(--ink-paper);
+  color: var(--paper);
+}
+.paper .range {
+  accent-color: var(--gold-deep);
+}
+.estimator .estimator__result {
+  border-color: var(--ink-paper);
+  background: var(--ink-paper);
+  color: #efe8da;
+  --ink: #efe8da;
+  --muted: #a89e8c;
+  --rule: color-mix(in srgb, var(--bronze) 60%, transparent);
+}
 
-/* Voices */
+/* ---------- Voices (dark) ---------- */
 .voices {
   max-width: 1100px;
   margin-inline: auto;
@@ -383,11 +400,10 @@
 }
 .voices__quote blockquote {
   font-family: var(--font-display);
-  font-weight: 300;
-  font-style: italic;
-  font-size: clamp(2rem, 4.6vw, 4rem);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  font-weight: 650;
+  font-size: clamp(1.9rem, 4vw, 3.6rem);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
 }
 .voices__quote figcaption {
   color: var(--muted);
@@ -398,7 +414,8 @@
   align-items: center;
   gap: var(--s-3);
   color: var(--muted);
-  font-size: var(--t-sm);
+  font-family: var(--font-mono);
+  font-size: var(--t-xs);
 }
 .voices__nav button {
   display: grid;
@@ -419,7 +436,7 @@
   transform: scaleX(-1);
 }
 
-/* FAQ */
+/* ---------- FAQ ---------- */
 .faq {
   display: grid;
   gap: var(--s-5);
@@ -427,9 +444,10 @@
 .faq__list {
   display: grid;
   max-width: 860px;
+  border-top: 1px solid var(--rule);
 }
 .faq__list li {
-  border-bottom: 1px solid var(--rule-soft);
+  border-bottom: 1px solid var(--rule);
 }
 .faq__list button {
   display: flex;
@@ -444,12 +462,14 @@
   cursor: pointer;
   text-align: left;
   font-family: var(--font-display);
-  font-size: clamp(1.4rem, 2.6vw, 2rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  font-size: clamp(1.3rem, 2.3vw, 1.85rem);
   color: var(--ink);
   transition: color var(--dur) var(--ease);
 }
 .faq__list button:hover {
-  color: var(--gold-hi);
+  color: var(--gold-deep);
 }
 .faq__list svg {
   flex: none;
@@ -524,9 +544,8 @@
   .path {
     gap: var(--s-4);
   }
-  .path__list {
-    gap: clamp(40px, 12vw, 72px);
-    padding-block: 0;
+  .path__step {
+    padding-block: 22px;
   }
   .results,
   .estimator,

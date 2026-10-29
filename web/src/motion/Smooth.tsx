@@ -12,6 +12,9 @@ export const scrollControl = {
   toTop: () => (lenis ? lenis.scrollTo(0, { immediate: true, force: true }) : window.scrollTo(0, 0)),
 };
 
+/** Lenis scroll velocity in px per frame (0 without smooth scroll). Read on the GSAP ticker. */
+export const scrollVelocity = () => lenis?.velocity ?? 0;
+
 /**
  * Smooth scroll on the GSAP ticker so scrubbed scenes stay in step with the scroll.
  * Not created at all under prefers-reduced-motion.

@@ -2,12 +2,13 @@ import { useState } from "react";
 import { SplitLines } from "../../motion/SplitLines";
 import { Icon } from "../../components/Icon";
 import { faqs } from "../../data/proof";
+import { PaperScene } from "../../motion/PaperScene";
 
 /** Answers the doubts an artist has before they join. One open at a time. */
 export function Faq() {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section className="faq" aria-labelledby="faq-title">
+    <PaperScene className="faq" aria-labelledby="faq-title">
       <SplitLines as="h2" text="Questions artists ask first." className="faq__title" id="faq-title" />
       <ul className="faq__list">
         {faqs.map((f, i) => (
@@ -24,6 +25,6 @@ export function Faq() {
           </li>
         ))}
       </ul>
-    </section>
+    </PaperScene>
   );
 }

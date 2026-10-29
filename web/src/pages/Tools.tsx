@@ -1,3 +1,4 @@
+import { PaperScene } from "../motion/PaperScene";
 import { useState } from "react";
 import { PageHead } from "../components/PageHead";
 import { Button } from "../components/Button";
@@ -39,7 +40,8 @@ export default function Tools() {
   return (
     <>
       <PageHead title="Free AI tools" lede="Drafts for briefs, bios, captions and plans." />
-      <div className="wrap section--tight grid grid--sidebar">
+      <PaperScene className="scene-paper" aria-label="Draft tools">
+      <div className="wrap grid grid--sidebar">
         <form
           className="panel form-grid"
           onSubmit={(e) => {
@@ -82,9 +84,10 @@ export default function Tools() {
         </form>
         <section className="panel panel--raised stack" aria-live="polite" aria-label="Draft">
           <h2 style={{ fontSize: "1.375rem" }}>Draft</h2>
-          {out ? <pre style={{ whiteSpace: "pre-wrap", font: "inherit", margin: 0 }}>{out}</pre> : <p className="empty">Your draft appears here. Mock output in this preview.</p>}
+          {out ? <pre style={{ whiteSpace: "pre-wrap", font: "inherit", margin: 0, overflowWrap: "anywhere" }}>{out}</pre> : <p className="empty">Your draft appears here. Mock output in this preview.</p>}
         </section>
       </div>
+      </PaperScene>
     </>
   );
 }

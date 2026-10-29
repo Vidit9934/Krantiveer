@@ -1,0 +1,70 @@
+/* scene: close (solid gold band, black type) */
+section.close {
+  max-width: none;
+  margin-inline: 0;
+  background: var(--gold);
+  color: var(--ink-paper);
+  justify-items: start;
+  padding-inline: max(var(--gutter), calc((100% - 1320px) / 2 + var(--gutter)));
+}
+section.close .close__title {
+  font-size: var(--t-giant);
+  font-weight: 750;
+  max-width: 12ch;
+}
+section.close .close__btn {
+  background: var(--ink-paper);
+  color: var(--gold);
+  font-weight: 700;
+}
+section.close .close__btn:hover {
+  background: #000;
+  color: var(--gold-hi);
+}
+section.close .close__badge {
+  color: var(--ink-paper);
+}
+
+/* A big black record bleeding off the right edge of the gold band, turning slowly. */
+section.close {
+  position: relative;
+  overflow: hidden;
+}
+section.close > *:not(.close__disc) {
+  position: relative;
+  z-index: 1;
+}
+section.close .close__disc {
+  position: absolute;
+  z-index: 0;
+  right: -14vw;
+  top: 50%;
+  width: min(64vw, 820px);
+  aspect-ratio: 1;
+  translate: 0 -50%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, #070605 0 1.6%, transparent 2%),
+    radial-gradient(circle, transparent 0 11%, rgb(0 0 0 / 0.5) 11.4% 12%, transparent 12.4%),
+    radial-gradient(circle, var(--gold-hi) 0 11%, transparent 11.4%),
+    conic-gradient(from 20deg, transparent 0 7%, rgb(255 238 205 / 0.16) 12%, transparent 17% 52%, rgb(255 238 205 / 0.1) 60%, transparent 66%),
+    repeating-radial-gradient(circle, rgb(255 238 205 / 0.05) 0 1px, transparent 1px 4px),
+    radial-gradient(circle, #15110d 0%, #070605 72%);
+  box-shadow: 0 40px 90px rgb(0 0 0 / 0.38), 0 0 0 1px rgb(0 0 0 / 0.5);
+  animation: close-spin 28s linear infinite;
+}
+@keyframes close-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+@media (max-width: 760px) {
+  section.close .close__disc {
+    right: -38vw;
+    top: auto;
+    bottom: -18vw;
+    translate: none;
+    width: 92vw;
+    opacity: 0.9;
+  }
+}
